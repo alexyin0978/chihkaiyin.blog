@@ -21,7 +21,7 @@ export default function Home() {
       {getMarkdownMetaData().map((metadata) => (
         <div key={metadata.title + metadata.subtitle}>
           <h3>{metadata.title}</h3>
-          <div>time</div>
+          <div className="">time</div>
           <h5>{metadata.subtitle}</h5>
         </div>
       ))}
