@@ -5,8 +5,16 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        dark_main: "#282c35",
+      },
+      maxWidth: {
+        pageMax: "40rem", // 640px
+      },
+    },
   },
   plugins: [],
 };

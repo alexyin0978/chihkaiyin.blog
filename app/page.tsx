@@ -1,25 +1,30 @@
 import fs from "fs";
+import matter from "gray-matter";
 
-fs.readdir(`${process.cwd()}/post`, (err, fileNames) => {
-  if (err) {
-    console.log(err);
-  }
+const rootPath = () => process.cwd();
 
-  fileNames.forEach((file, idx) => {
-    if (idx === 1) {
-      console.log("file: ", file);
+const getMarkdownMetaData = () => {
+  const fileNames = fs.readdirSync(`${rootPath()}/post`);
+  const metadatas = fileNames.map((fileName) => {
+    const markdown = fs.readFileSync(`${rootPath()}/post/${fileName}`, "utf-8");
+    const { data } = matter(markdown);
 
-      fs.readFile(`${process.cwd()}/post/${file}`, "utf8", (err, content) => {
-        if (err) {
-          console.log("err: ", err);
-        }
-
-        console.log("content: ", content);
-      });
-    }
+    return data;
   });
-});
+
+  return metadatas;
+};
 
 export default function Home() {
-  return <div>Hello world</div>;
+  return (
+    <div>
+      {getMarkdownMetaData().map((metadata) => (
+        <div key={metadata.title + metadata.subtitle}>
+          <h3>{metadata.title}</h3>
+          <div>time</div>
+          <h5>{metadata.subtitle}</h5>
+        </div>
+      ))}
+    </div>
+  );
 }
