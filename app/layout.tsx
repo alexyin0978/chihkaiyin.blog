@@ -4,7 +4,7 @@ import { Inter, DM_Sans } from "next/font/google";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
-import { ThemeProvider } from "./ThemeProvider";
+// import { ThemeProvider } from "./ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,8 +16,8 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-white dark:bg-dark_main">
-        <ThemeProvider>
+      <body className="dark:bg-dark_main flex justify-center">
+        {/* <ThemeProvider>
           <div
             id="app"
             className="max-w-pageMax mx-auto bg-white dark:bg-main_dark text-content dark:text-content_dark"
@@ -26,7 +26,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
             <Footer />
           </div>
-        </ThemeProvider>
+        </ThemeProvider> */}
+        <div className="max-w-pageMax bg-yellow-300 mx-auto w-full py-11 px-5">
+          <Nav />
+          {children}
+        </div>
       </body>
     </html>
   );
