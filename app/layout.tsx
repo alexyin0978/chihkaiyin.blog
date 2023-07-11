@@ -9,28 +9,28 @@ import Footer from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Overreacted",
-  description: "A blog build by Yin Chih Kai",
+  title: "CHIHKAI_YIN",
+  description: "A blog built by Yin Chih Kai",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="dark:bg-dark_main flex justify-center">
-        {/* <ThemeProvider>
-          <div
-            id="app"
-            className="max-w-pageMax mx-auto bg-white dark:bg-main_dark text-content dark:text-content_dark"
-          >
-            <Nav />
-            {children}
-            <Footer />
-          </div>
-        </ThemeProvider> */}
-        <div className="max-w-pageMax bg-yellow-300 mx-auto w-full py-11 px-5">
+      <body className="bg-main_dark dark:bg-dark_main">
+        {/* <ThemeProvider> */}
+        <div
+          id="app"
+          className="relative max-w-pageMax mx-auto w-full pt-11 px-5 h-full min-h-screen"
+        >
           <Nav />
           {children}
+          <Footer />
         </div>
+        {/* </ThemeProvider> */}
       </body>
     </html>
   );
