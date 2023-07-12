@@ -17,7 +17,7 @@ export default function Footer() {
       <p>© 2023 ChihKai Yin</p>
       <div className="flex gap-3.5">
         {mediaLinks.map(({ type, link }) => (
-          <Link key={type} href={link} className="hover:font-semibold">
+          <Link key={type} href={link} className="hover:text-header_dark">
             {type}
           </Link>
         ))}
