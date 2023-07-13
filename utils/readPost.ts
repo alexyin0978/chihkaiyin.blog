@@ -8,13 +8,17 @@ export interface PostMetaData {
   date: string;
 }
 
-export const getMarkdownMetaData = () => {
-  const rootPath = () => process.cwd();
+const rootPath = () => process.cwd();
 
+const parseMarkdown = (path: string) => {
+  const markdown = fs.readFileSync(path, "utf-8");
+  return matter(markdown);
+};
+
+export const getAllPostsMetaDatas = () => {
   const fileNames = fs.readdirSync(`${rootPath()}/post`);
   const metadatas = fileNames.map(fileName => {
-    const markdown = fs.readFileSync(`${rootPath()}/post/${fileName}`, "utf-8");
-    const { data } = matter(markdown);
+    const { data } = parseMarkdown(`${rootPath()}/post/${fileName}`);
 
     // add fileName to data
     const fileNameWithoutExtension = fileName.split(".")[0];
@@ -24,4 +28,9 @@ export const getMarkdownMetaData = () => {
   });
 
   return metadatas;
+};
+
+export const getPostContent = (post: string) => {
+  const { content } = parseMarkdown(`${rootPath()}/post/${post}.md`);
+  return content;
 };

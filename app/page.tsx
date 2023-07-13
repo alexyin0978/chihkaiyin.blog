@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Merriweather } from "next/font/google";
 import { Montserrat } from "@next/font/google";
 
-import { getMarkdownMetaData, PostMetaData } from "@/utils/readMarkdown";
+import { getAllPostsMetaDatas, PostMetaData } from "@/utils/readPost";
 
 import { SelfIntro } from "@/components/SelfIntro";
 
@@ -38,7 +38,7 @@ const PostListItem = (props: PostMetaData) => {
 };
 
 export default function Home() {
-  const postMetaDatas = getMarkdownMetaData();
+  const postMetaDatas = getAllPostsMetaDatas();
 
   return (
     <div className="pb-36">
