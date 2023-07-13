@@ -30,7 +30,6 @@ export const getAllPostsMetaDatas = () => {
   return metadatas;
 };
 
-export const getPostContent = (post: string) => {
-  const { content } = parseMarkdown(`${rootPath()}/post/${post}.md`);
-  return content;
+export const getPost = (post: string) => {
+  return parseMarkdown(`${rootPath()}/post/${post}.md`);
 };
