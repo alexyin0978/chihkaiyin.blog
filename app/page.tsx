@@ -38,7 +38,7 @@ export default function Home() {
   const postMetaDatas = getAllPostsMetaDatas();
 
   return (
-    <div className="pb-36">
+    <>
       <SelfIntro />
       <main>
         {postMetaDatas.length !== 0 &&
@@ -46,6 +46,6 @@ export default function Home() {
             <PostListItem key={topic.title + idx} {...topic} />
           ))}
       </main>
-    </div>
+    </>
   );
 }

@@ -22,7 +22,7 @@ export default function Post({ params }: PostProps) {
   const post = getPost(params.post);
   const postMetaData = post.data as PostMetaData;
   return (
-    <main className="pt-4 pb-36">
+    <main className="pt-4">
       <header className="mb-7">
         <h1
           className={`${montserrat.className} text-[40px] text-header_dark font-extrabold`}
