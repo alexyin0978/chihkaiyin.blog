@@ -1,12 +1,7 @@
 import "./globals.css";
-import { Inter, DM_Sans } from "next/font/google";
 
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-
-// import { ThemeProvider } from "./ThemeProvider";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "YIN",
@@ -20,8 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-main_dark dark:bg-dark_main">
-        {/* <ThemeProvider> */}
+      <body className="bg-main_dark">
         <div
           id="app"
           className="relative max-w-pageMax mx-auto w-full pt-11 px-5 h-full min-h-screen"
@@ -30,7 +24,6 @@ export default function RootLayout({
           {children}
           <Footer />
         </div>
-        {/* </ThemeProvider> */}
       </body>
     </html>
   );

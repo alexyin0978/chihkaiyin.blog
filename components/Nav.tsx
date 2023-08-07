@@ -1,4 +1,3 @@
-// import { ThemeChanger } from "./ThemeChanger";
 import Link from "next/link";
 import { Montserrat } from "@next/font/google";
 
@@ -18,8 +17,6 @@ export default function Nav() {
       >
         {pageTitle}
       </Link>
-      {/* TODO: theme button */}
-      {/* <ThemeChanger /> */}
     </nav>
   );
 }

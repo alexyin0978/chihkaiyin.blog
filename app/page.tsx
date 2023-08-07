@@ -27,9 +27,6 @@ const PostListItem = (props: PostMetaData) => {
         </h3>
         <div className="flex items-center gap-2 mt-2">
           <small className="text-xs">{date}</small>
-          {/* TODO: tags links */}
-          {/* <small className="text-xs">|</small>
-          <small className="text-xs">tags will be here</small> */}
         </div>
       </header>
       <p className="mt-2">{subtitle}</p>
