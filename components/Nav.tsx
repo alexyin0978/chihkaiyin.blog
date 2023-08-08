@@ -13,7 +13,7 @@ export default function Nav() {
     <nav className="mb-8">
       <Link
         href={"/"}
-        className={`text-3xl font-extrabold text-white ${montserrat.className}`}
+        className={`text-2xl sm:text-3xl font-extrabold text-white ${montserrat.className}`}
       >
         {pageTitle}
       </Link>
