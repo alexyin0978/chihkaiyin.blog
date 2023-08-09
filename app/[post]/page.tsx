@@ -1,5 +1,5 @@
 import { Merriweather, Montserrat } from "next/font/google";
-import Markdown from "markdown-to-jsx";
+import ReactMarkdown from "react-markdown";
 
 import { PostMetaData, getPost } from "@/utils/readPost";
 
@@ -18,11 +18,10 @@ type PostProps = {
   };
 };
 
-type StylingTarget = "headings" | "a" | "blockquote" | "strong" | "code" | "p";
-type MarkdownStyles = Record<StylingTarget, string>;
-
 // TODO: I don't know why tailwind doesn't process the right style for addProsePrefix
 // I hard coded the style for now
+// type StylingTarget = "headings" | "a" | "blockquote" | "strong" | "code" | "p";
+// type MarkdownStyles = Record<StylingTarget, string>;
 
 // const markdownStyles: MarkdownStyles = {
 //   headings: "text-gray-300",
@@ -56,11 +55,15 @@ const proseStyles = {
   blockquote: "prose-blockquote:text-gray-300",
   strong: "prose-strong:text-gray-300 prose-strong:font-bold",
   pre: "prose-pre:bg-[#011627] prose-pre:rounded-xl prose-pre:p-5 prose-pre:-mx-5",
+  code: "prose-code:before:content-none prose-code:after:content-none prose-code:bg-[#737c99] prose-code:text-gray-300 prose-code:bg-opacity-20 prose-code:rounded-sm prose-code:px-1",
 };
 
 export default function Post({ params }: PostProps) {
-  const post = getPost(params.post);
-  const postMetaData = post.data as PostMetaData;
+  const { data: postMetaData, content: postMarkdown } = getPost(params.post);
+
+  const MarkdownComponents: object = {
+    // SyntaxHighlight code will go here
+  };
 
   return (
     <main className="pt-4">
@@ -68,20 +71,21 @@ export default function Post({ params }: PostProps) {
         <h1
           className={`${montserrat.className}  text-4xl sm:text-[40px] sm:leading-10 mb-3 text-header_dark font-extrabold`}
         >
-          {postMetaData.title}
+          {(postMetaData as PostMetaData).title}
         </h1>
         <p className={`text-gray-300 text-sm ${merriweather.className}`}>
-          {postMetaData.date}
+          {(postMetaData as PostMetaData).date}
         </p>
       </header>
       <article
         className={`prose text-gray-300 ${proseStyles.headings} 
         ${proseStyles.p} ${proseStyles.a} ${proseStyles.blockquote} 
         ${proseStyles.strong} ${proseStyles.pre}
-        prose-code:before:content-none prose-code:after:content-none prose-code:bg-[#737c99] prose-code:text-gray-300 prose-code:bg-opacity-20 prose-code:rounded-sm prose-code:px-1
-        ${merriweather.className}`}
+        ${proseStyles.code} ${merriweather.className}`}
       >
-        <Markdown>{post.content}</Markdown>
+        <ReactMarkdown components={MarkdownComponents}>
+          {postMarkdown}
+        </ReactMarkdown>
       </article>
     </main>
   );
