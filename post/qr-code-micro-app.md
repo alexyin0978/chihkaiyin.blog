@@ -59,7 +59,6 @@ When a user sends a message, it generates a random tag using `uuid4` (which I tr
 characters to keep it a bit shorter). A URL to view this message will then be used to create a QR code.
 
 ```python
-
 # uuid is a built-in Python library to generate random IDs with, with low chance of collision.
 qr_id = uuid.uuid4().hex[:12]
 qr_tag = f"qr-{qr_id}"
