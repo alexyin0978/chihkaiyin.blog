@@ -20,11 +20,38 @@ It was trained on an estimated **45 TB** of text data (pretty much anything that
 
 We can literally ask it to do anything. For example, if I ask for steps to bake a cake it gives me:
 
-```
-1. Preheat oven to 350°F.
-2. Grease and flour a 9-inch round cake pan.
-3. Stir cake mix, oil, eggs, and water in a large bowl with a spoon until blended.
-4. Pour batter into prepared pan.
+```tsx {3-4, 8}
+export default function Post({ params }: PostProps) {
+  const { data: postMetaData, content: postMarkdown } = getPost(params.post);
+
+  // const MarkdownComponents: object = {
+  //   code({ node, inline, className, ...props }) {
+  //     const hasLang = /language-(\w+)/.exec(className || "");
+  //     const hasMeta = node?.data?.meta;
+
+  return (
+    <main className="pt-4">
+      <header className="mb-7">
+        <h1
+          className={`${montserrat.className}  text-4xl sm:text-[40px] sm:leading-10 mb-3 text-header_dark font-extrabold`}
+        >
+          {(postMetaData as PostMetaData).title}
+        </h1>
+        <p className={`text-gray-300 text-sm ${merriweather.className}`}>
+          {(postMetaData as PostMetaData).date}
+        </p>
+      </header>
+      <article
+        className={`prose text-gray-300 ${proseStyles.headings} 
+        ${proseStyles.p} ${proseStyles.a} ${proseStyles.blockquote} 
+        ${proseStyles.strong} ${proseStyles.pre}
+        ${proseStyles.code} ${merriweather.className}`}
+      >
+        <Markdown markdown={postMarkdown} />
+      </article>
+    </main>
+  );
+}
 ```
 
 Alternatively, I can provide it with an example of what I want. Such as:
