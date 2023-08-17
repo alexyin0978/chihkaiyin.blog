@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* styling for markdown */
-pre > code {
-  @apply !bg-transparent;
+/* styling for markdown inline code */
+/* TODO: find a more efficiant way to style inline-code */
+p > .p__inline-code {
+  @apply before:content-none after:content-none bg-[#737c99] text-gray-300 bg-opacity-20 rounded-sm px-1 font-light text-base py-[2px] mx-[1px];
 }

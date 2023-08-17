@@ -41,7 +41,7 @@ export default function Markdown({ markdown }: { markdown: string }) {
 
           const hasMeta = !!node?.data?.meta;
 
-          const applyHighlights: object = (applyHighlights: number) => {
+          const applyLineStyle: object = (currentLineNumber: number) => {
             if (!hasMeta) return undefined;
 
             const RE = /{([\d,-]+)}/;
@@ -51,42 +51,44 @@ export default function Markdown({ markdown }: { markdown: string }) {
                 ? node.data.meta.replace(/\s/g, "")
                 : "";
 
-            const strlineNumbers =
+            // eg: "1-3,8"
+            // eg: "0"
+            const lineNumbers =
               RE?.test(metadata) && RE?.exec(metadata)
                 ? (RE.exec(metadata) as RegExpExecArray)[1]
                 : "0";
 
-            console.log(strlineNumbers);
-            const highlightLines = rangeParser(strlineNumbers);
-            const data: string | null = highlightLines.includes(applyHighlights)
-              ? "!bg-red-300"
-              : "!bg-yellow-300";
+            // eg: [1,2,3,8]
+            const linesToHighlight = rangeParser(lineNumbers);
 
-            console.log(data);
-            return { data };
+            let style: Record<string, string> = { display: "block" };
+
+            if (linesToHighlight.includes(currentLineNumber)) {
+              style.backgroundColor = "rgba(220, 220, 220, 0.1)";
+            }
+            return { style };
           };
 
-          const shouldHighlight = !inline && hasLang && hasMounted;
+          const isLangSpecified = !inline && hasLang;
           const contentToHighlight = String(children).replace(/\n$/, "");
 
-          return shouldHighlight ? (
+          return isLangSpecified ? (
             <SyntaxHighlighter
               style={nightOwl}
               // NOTE:
               // executing "language" on server will somehow cause hydration error(mismatch on className)
               // so, do it after client mounted
-              language={hasLang[1]}
+              language={hasMounted ? hasLang[1] : ""}
               PreTag="div"
-              className="codeStyle !my-0 !p-0"
-              showLineNumbers={false}
-              useInlineStyles={true}
+              className="codeStyle !my-0 !p-0 flex"
+              showLineNumbers={true}
               wrapLines={hasMeta}
-              lineProps={applyHighlights}
+              lineProps={applyLineStyle}
             >
               {contentToHighlight}
             </SyntaxHighlighter>
           ) : (
-            <code className={className} {...props}>
+            <code className={`${className} p__inline-code`} {...props}>
               {children}
             </code>
           );

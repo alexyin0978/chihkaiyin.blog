@@ -56,13 +56,11 @@ const proseStyles = {
   blockquote: "prose-blockquote:text-gray-300",
   strong: "prose-strong:text-gray-300 prose-strong:font-bold",
   pre: "prose-pre:bg-[#011627] prose-pre:rounded-xl prose-pre:p-5 prose-pre:-mx-5",
-  // pre: "prose-pre:bg-[#011627] prose-pre:rounded-xl prose-pre:p-5 prose-pre:-mx-5",
-  // code: "prose-code:before:content-none prose-code:after:content-none prose-code:bg-[#737c99] prose-code:text-gray-300 prose-code:bg-opacity-20 prose-code:rounded-sm prose-code:px-1",
-  code: "",
 };
 
 export default function Post({ params }: PostProps) {
   const { data: postMetaData, content: postMarkdown } = getPost(params.post);
+  const { title, date } = postMetaData as PostMetaData;
 
   return (
     <main className="pt-4">
@@ -70,18 +68,17 @@ export default function Post({ params }: PostProps) {
         <h1
           className={`${montserrat.className}  text-4xl sm:text-[40px] sm:leading-10 mb-3 text-header_dark font-extrabold`}
         >
-          {(postMetaData as PostMetaData).title}
+          {title}
         </h1>
         <p className={`text-gray-300 text-sm ${merriweather.className}`}>
-          {(postMetaData as PostMetaData).date}
+          {date}
         </p>
       </header>
 
       <article
         className={`prose text-gray-300 ${proseStyles.headings}
       ${proseStyles.p} ${proseStyles.a} ${proseStyles.blockquote}
-      ${proseStyles.strong} ${proseStyles.pre}
-      ${proseStyles.code} ${merriweather.className}`}
+      ${proseStyles.strong} ${proseStyles.pre} ${merriweather.className}`}
       >
         <Markdown markdown={postMarkdown} />
         sss

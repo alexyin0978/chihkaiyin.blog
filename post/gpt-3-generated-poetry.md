@@ -20,7 +20,7 @@ It was trained on an estimated **45 TB** of text data (pretty much anything that
 
 We can literally ask it to do anything. For example, if I ask for steps to bake a cake it gives me:
 
-```tsx {3-4, 8}
+```tsx {1-3, 8}
 export default function Post({ params }: PostProps) {
   const { data: postMetaData, content: postMarkdown } = getPost(params.post);
 
