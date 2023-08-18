@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Merriweather, Montserrat } from "next/font/google";
 
 import {
@@ -7,7 +8,6 @@ import {
 } from "@/utils/readPost";
 
 import Markdown from "@/components/Markdown";
-import Link from "next/link";
 
 type PostProps = {
   params: {
