@@ -1,8 +1,13 @@
 import { Merriweather, Montserrat } from "next/font/google";
 
-import { PostMetaData, getPost } from "@/utils/readPost";
+import {
+  PostMetaData,
+  getAdjacentPostMetaDatas,
+  getPost,
+} from "@/utils/readPost";
 
 import Markdown from "@/components/Markdown";
+import Link from "next/link";
 
 type PostProps = {
   params: {
@@ -61,9 +66,10 @@ const proseStyles = {
 export default function Post({ params }: PostProps) {
   const { data: postMetaData, content: postMarkdown } = getPost(params.post);
   const { title, date } = postMetaData as PostMetaData;
+  const [prevPostMetadata, nextPostMetadata] = getAdjacentPostMetaDatas(title);
 
   return (
-    <main className="pt-4">
+    <>
       <header className="mb-7">
         <h1
           className={`${montserrat.className}  text-4xl sm:text-[40px] sm:leading-10 mb-3 text-header_dark font-extrabold`}
@@ -74,15 +80,37 @@ export default function Post({ params }: PostProps) {
           {date}
         </p>
       </header>
-
-      <article
-        className={`prose text-gray-300 ${proseStyles.headings}
+      <main className="pt-4">
+        <article
+          className={`prose text-gray-300 ${proseStyles.headings}
       ${proseStyles.p} ${proseStyles.a} ${proseStyles.blockquote}
       ${proseStyles.strong} ${proseStyles.pre} ${merriweather.className}`}
-      >
-        <Markdown markdown={postMarkdown} />
-        sss
-      </article>
-    </main>
+        >
+          <Markdown markdown={postMarkdown} />
+        </article>
+      </main>
+      <aside className="mt-14 -mb-1">
+        <ul className="flex justify-between items-center text-base text-header_dark">
+          <li
+            className={`${
+              !prevPostMetadata ? "invisible" : ""
+            } hover:font-semibold duration-200 transition-['font-weight']`}
+          >
+            <Link href={`/${prevPostMetadata?.fileName}`}>
+              ← {prevPostMetadata?.title}
+            </Link>
+          </li>
+          <li
+            className={`${
+              !nextPostMetadata ? "invisible" : ""
+            } hover:font-semibold duration-200 transition-['font-weight']`}
+          >
+            <Link href={`/${nextPostMetadata?.fileName}`}>
+              {nextPostMetadata?.title} →
+            </Link>
+          </li>
+        </ul>
+      </aside>
+    </>
   );
 }

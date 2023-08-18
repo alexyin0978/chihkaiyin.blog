@@ -36,7 +36,6 @@ export default function Markdown({ markdown }: { markdown: string }) {
     <ReactMarkdown
       components={{
         code({ node, inline, className, children, ...props }) {
-          // className can cause hydration error, only executes it after mounted
           const hasLang = /language-(\w+)/.exec(className || "");
 
           const hasMeta = !!node?.data?.meta;

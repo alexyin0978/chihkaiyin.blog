@@ -11,11 +11,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        main: colors.white,
-        main_dark: "#282c35",
-        header: "#d23669",
-        header_dark: "#efdd8d",
-        content: "#222222",
+        // main: colors.white,
+        main_dark: "#101010",
+        // header: "#d23669",
+        header_dark: "#E3D888",
+        // content: "#222222",
         content_dark: "#e8ddb5",
       },
       maxWidth: {

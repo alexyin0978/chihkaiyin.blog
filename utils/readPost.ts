@@ -44,3 +44,15 @@ export const getAllPostsMetaDatas = () => {
 export const getPost = (post: string) => {
   return parseMarkdown(`${rootPath()}/post/${post}.md`);
 };
+
+export const getAdjacentPostMetaDatas = (
+  currentPostTitle: string,
+): [PostMetaData | undefined, PostMetaData | undefined] => {
+  const metadatas = getAllPostsMetaDatas();
+
+  const currentPostIndex = metadatas.findIndex(
+    metadata => metadata.title === currentPostTitle,
+  );
+
+  return [metadatas[currentPostIndex - 1], metadatas[currentPostIndex + 1]];
+};
