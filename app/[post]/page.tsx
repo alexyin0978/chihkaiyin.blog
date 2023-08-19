@@ -3,7 +3,7 @@ import { Merriweather, Montserrat } from "next/font/google";
 
 import {
   PostMetaData,
-  getAdjacentPostMetaDatas,
+  getAdjacentPostsMetaDatas,
   getPost,
 } from "@/utils/readPost";
 
@@ -66,7 +66,10 @@ const proseStyles = {
 export default function Post({ params }: PostProps) {
   const { data: postMetaData, content: postMarkdown } = getPost(params.post);
   const { title, date } = postMetaData as PostMetaData;
-  const [prevPostMetadata, nextPostMetadata] = getAdjacentPostMetaDatas(title);
+  const [prevPostMetadata, nextPostMetadata] = getAdjacentPostsMetaDatas(title);
+
+  const postLinkSharedStyle =
+    "hover:font-semibold duration-200 transition-['font-weight'] hover:font-semibold duration-200 transition-['font-weight']";
 
   return (
     <>
@@ -94,7 +97,7 @@ export default function Post({ params }: PostProps) {
           <li
             className={`${
               !prevPostMetadata ? "invisible" : ""
-            } hover:font-semibold duration-200 transition-['font-weight']`}
+            } ${postLinkSharedStyle}`}
           >
             <Link href={`/${prevPostMetadata?.fileName}`}>
               ← {prevPostMetadata?.title}
@@ -103,7 +106,7 @@ export default function Post({ params }: PostProps) {
           <li
             className={`${
               !nextPostMetadata ? "invisible" : ""
-            } hover:font-semibold duration-200 transition-['font-weight']`}
+            } ${postLinkSharedStyle}`}
           >
             <Link href={`/${nextPostMetadata?.fileName}`}>
               {nextPostMetadata?.title} →

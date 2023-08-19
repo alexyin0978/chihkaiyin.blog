@@ -45,7 +45,7 @@ export const getPost = (post: string) => {
   return parseMarkdown(`${rootPath()}/post/${post}.md`);
 };
 
-export const getAdjacentPostMetaDatas = (
+export const getAdjacentPostsMetaDatas = (
   currentPostTitle: string,
 ): [PostMetaData | undefined, PostMetaData | undefined] => {
   const metadatas = getAllPostsMetaDatas();
