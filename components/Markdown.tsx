@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rangeParser from "parse-numeric-range";
 
+import { useHasMounted } from "@/hooks";
+
 // NOTE: SyntaxHighlighter is a client component
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { nightOwl } from "react-syntax-highlighter/dist/cjs/styles/prism"; // syntax theming
 import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
 import tsx from "react-syntax-highlighter/dist/cjs/languages/prism/tsx";
 import typescript from "react-syntax-highlighter/dist/cjs/languages/prism/typescript";
@@ -14,7 +16,6 @@ import javascript from "react-syntax-highlighter/dist/cjs/languages/prism/javasc
 import bash from "react-syntax-highlighter/dist/cjs/languages/prism/bash";
 import markdown from "react-syntax-highlighter/dist/cjs/languages/prism/markdown";
 import json from "react-syntax-highlighter/dist/cjs/languages/prism/json";
-import { nightOwl } from "react-syntax-highlighter/dist/cjs/styles/prism"; // syntax theming
 
 SyntaxHighlighter.registerLanguage("css", css);
 SyntaxHighlighter.registerLanguage("tsx", tsx);
@@ -26,11 +27,7 @@ SyntaxHighlighter.registerLanguage("markdown", markdown);
 SyntaxHighlighter.registerLanguage("json", json);
 
 export default function Markdown({ markdown }: { markdown: string }) {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
+  const hasMounted = useHasMounted();
 
   return (
     <ReactMarkdown

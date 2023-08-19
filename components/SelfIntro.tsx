@@ -13,7 +13,7 @@ export const SelfIntro = () => {
   return (
     <aside className="flex items-center pb-7 mb-12">
       {/* avatar */}
-      <div className="w-16 h-16 rounded-full mr-4 border border-gray-400 overflow-hidden pb-5">
+      <div className="w-16 h-16 rounded-full mr-4 border border-red-300 dark:border-gray-400 overflow-hidden pb-5">
         <Image
           src={Avatar}
           width={60}
@@ -23,12 +23,12 @@ export const SelfIntro = () => {
         />
       </div>
       {/* intro */}
-      <div className={`text-white ${merriweather.className}`}>
+      <div className={`text-white dark:text-white ${merriweather.className}`}>
         <p>
           Personal blog by{" "}
           <Link
             href={"https://www.linkedin.com/in/alexyin0978/"}
-            className="text-header_dark underline underline-offset-2"
+            className="text-header dark:text-header_dark underline underline-offset-2"
           >
             ChihKai Yin
           </Link>

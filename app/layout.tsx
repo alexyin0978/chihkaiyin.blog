@@ -2,6 +2,7 @@ import "./globals.css";
 
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import { Providers as ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata = {
   title: "YIN",
@@ -15,15 +16,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="bg-main_dark">
-        <div
-          id="app"
-          className="relative max-w-pageMax mx-auto w-full pt-11 px-5 h-full min-h-screen"
-        >
-          <Nav />
-          {children}
-          <Footer />
-        </div>
+      <body>
+        <ThemeProvider>
+          <div
+            id="app"
+            className="bg-main dark:bg-main_dark relative max-w-pageMax mx-auto w-full pt-11 px-5 h-full min-h-screen"
+          >
+            <Nav />
+            {children}
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

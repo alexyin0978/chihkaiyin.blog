@@ -18,10 +18,12 @@ const montserrat = Montserrat({
 const PostListItem = (props: PostMetaData) => {
   const { title, date, subtitle, fileName } = props;
   return (
-    <article className={`mt-14 text-white ${merriweather.className}`}>
+    <article
+      className={`mt-14 text-black dark:text-white ${merriweather.className}`}
+    >
       <header>
         <h3
-          className={`text-3xl font-extrabold text-header_dark ${montserrat.className}`}
+          className={`text-3xl font-extrabold text-header dark:text-header_dark ${montserrat.className}`}
         >
           <Link href={`/${fileName}`}>{title}</Link>
         </h3>

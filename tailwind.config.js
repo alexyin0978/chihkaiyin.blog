@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-import colors from "tailwindcss/colors";
+
+const colors = require("tailwindcss/colors");
 
 module.exports = {
   content: [
@@ -11,11 +12,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // main: colors.white,
-        main_dark: "#050505",
-        // header: "#d23669",
+        main: colors.white,
+        main_dark: "#121212",
+        header: "#d23669",
         header_dark: "#E3D888",
-        // content: "#222222",
+        content: "#222222",
         content_dark: "#e8ddb5",
       },
       maxWidth: {
