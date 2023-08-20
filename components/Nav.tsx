@@ -10,12 +10,18 @@ const montserrat = Montserrat({
 
 const pageTitle = "CHIHKAI_YIN";
 
-export default function Nav() {
+export default function Nav({
+  titleSize = "text-2xl sm:text-3xl",
+  titleColor = "text-pageTitle dark:text-pageTitle_dark",
+}: {
+  titleSize?: string;
+  titleColor?: string;
+}) {
   return (
-    <nav className="flex mb-8 justify-between items-center">
+    <nav className="flex justify-between items-center">
       <Link
         href={"/"}
-        className={`text-2xl sm:text-3xl font-extrabold text-black dark:text-white ${montserrat.className}`}
+        className={`${titleSize} font-extrabold ${titleColor} ${montserrat.className}`}
       >
         {pageTitle}
       </Link>

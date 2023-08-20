@@ -14,10 +14,10 @@ module.exports = {
       colors: {
         main: colors.white,
         main_dark: "#121212",
+        pageTitle: "#222222",
+        pageTitle_dark: colors.white,
         header: "#d23669",
         header_dark: "#E3D888",
-        content: "#222222",
-        content_dark: "#e8ddb5",
       },
       maxWidth: {
         pageMax: "40rem", // 640px

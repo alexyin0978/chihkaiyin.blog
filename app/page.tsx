@@ -5,9 +5,10 @@ import { Montserrat } from "@next/font/google";
 import { getAllPostsMetaDatas, PostMetaData } from "@/utils/readPost";
 
 import { SelfIntro } from "@/components/SelfIntro";
+import Nav from "@/components/Nav";
 
 const merriweather = Merriweather({
-  weight: "300",
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -41,6 +42,7 @@ export default function Home() {
 
   return (
     <>
+      <Nav />
       <SelfIntro />
       <main>
         {postMetaDatas.length !== 0 &&

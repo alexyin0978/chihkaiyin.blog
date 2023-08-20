@@ -5,25 +5,24 @@ import { Merriweather } from "next/font/google";
 import Avatar from "/assets/avatar.jpeg";
 
 const merriweather = Merriweather({
-  weight: "300",
+  weight: "400",
   subsets: ["latin"],
 });
 
 export const SelfIntro = () => {
   return (
-    <aside className="flex items-center pb-7 mb-12">
+    <aside className="flex items-center pb-7 mb-12 mt-10">
       {/* avatar */}
-      <div className="w-16 h-16 rounded-full mr-4 border border-red-300 dark:border-gray-400 overflow-hidden pb-5">
+      <div className="w-16 h-16 rounded-full mr-4 border border-gray-400 overflow-hidden pb-5">
         <Image
           src={Avatar}
-          width={60}
-          height={107}
+          width={72}
           alt="avatar"
-          className="-mt-[23px] ml-[0.5px]"
+          className="-mt-[24px] mr-[1px]"
         />
       </div>
       {/* intro */}
-      <div className={`text-white dark:text-white ${merriweather.className}`}>
+      <div className={`text-black dark:text-white ${merriweather.className}`}>
         <p>
           Personal blog by{" "}
           <Link

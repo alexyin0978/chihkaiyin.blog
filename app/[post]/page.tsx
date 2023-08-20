@@ -8,6 +8,7 @@ import {
 } from "@/utils/readPost";
 
 import Markdown from "@/components/Markdown";
+import Nav from "@/components/Nav";
 
 type PostProps = {
   params: {
@@ -55,19 +56,18 @@ const montserrat = Montserrat({
 // };
 
 const proseStyles = {
-  headings:
-    "dark:prose-headings:text-red-300 dark:prose-headings:text-gray-300",
-  p: "prose-p:text-base prose-p:leading-7 prose-p:text-red-300 dark:prose-p:text-gray-300",
+  headings: "prose-headings:text-header dark:prose-headings:text-header_dark",
+  p: "prose-p:text-base prose-p:leading-7 prose-p:text-black dark:prose-p:text-gray-300",
   a: "prose-a:text-header dark:prose-a:text-header_dark prose-a:underline-offset-4 prose-a:decoration-1",
   blockquote:
     "prose-blockquote:text-yellow-300 dark:prose-blockquote:text-gray-300",
   strong:
-    "prose-strong:text-pink-300 dark:prose-strong:text-gray-300 prose-strong:font-bold",
+    "prose-strong:text-black dark:prose-strong:text-gray-300 prose-strong:font-bold",
   pre: "prose-pre:bg-[#011627] prose-pre:rounded-xl prose-pre:p-5 prose-pre:-mx-5",
 };
 
 const postLinkSharedStyle =
-  "hover:font-semibold duration-200 transition-['font-weight'] hover:font-semibold duration-200 transition-['font-weight']";
+  "hover:font-semibold duration-200 transition-['font-weight']";
 
 export default function Post({ params }: PostProps) {
   const { data: postMetaData, content: postMarkdown } = getPost(params.post);
@@ -76,21 +76,25 @@ export default function Post({ params }: PostProps) {
 
   return (
     <>
-      <header className="mb-7">
+      <Nav
+        titleSize="text-2xl"
+        titleColor="text-[#ffa7c4] dark:text-amber-100"
+      />
+      <header className="mb-7 mt-14">
         <h1
           className={`${montserrat.className} text-4xl sm:text-[40px] sm:leading-10 mb-3 text-header dark:text-header_dark font-extrabold`}
         >
           {title}
         </h1>
         <p
-          className={`text-red-300 dark:text-gray-300 text-sm ${merriweather.className}`}
+          className={`text-black dark:text-gray-300 text-sm ${merriweather.className}`}
         >
           {date}
         </p>
       </header>
       <main className="pt-4">
         <article
-          className={`prose text-red-300 dark:text-gray-300 ${proseStyles.headings}
+          className={`prose text-black dark:text-gray-300 ${proseStyles.headings}
       ${proseStyles.p} ${proseStyles.a} ${proseStyles.blockquote}
       ${proseStyles.strong} ${proseStyles.pre} ${merriweather.className}`}
         >
@@ -98,7 +102,7 @@ export default function Post({ params }: PostProps) {
         </article>
       </main>
       <aside className="mt-14 -mb-1">
-        <ul className="flex justify-between items-center text-base text-red-300 dark:text-header_dark">
+        <ul className="flex justify-between items-center text-base text-header dark:text-header_dark">
           <li
             className={`${
               !prevPostMetadata ? "invisible" : ""
