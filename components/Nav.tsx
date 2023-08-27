@@ -18,13 +18,14 @@ export default function Nav({
   titleColor?: string;
 }) {
   return (
-    <nav className="flex justify-between items-center">
+    <nav className="flex justify-between items-center h-10">
       <Link
         href={"/"}
         className={`${titleSize} font-extrabold ${titleColor} ${montserrat.className}`}
       >
         {pageTitle}
       </Link>
+
       <ThemeSwitch />
     </nav>
   );
