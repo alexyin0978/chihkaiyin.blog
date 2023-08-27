@@ -4,48 +4,77 @@ import { useTheme } from "next-themes";
 import { useHasMounted } from "@/hooks";
 
 const THEME_VALUE = {
-  SYSTEM: "system",
+  // SYSTEM: "system",
   DARK: "dark",
   LIGHT: "light",
 };
 
-const ThemeSwitch = () => {
-  const { theme, setTheme } = useTheme();
-  const hasMounted = useHasMounted();
+const switchStyles = {
+  sun: {
+    positionX: {
+      dark: "translate-x-8",
+      light: "translate-x-1",
+    },
+  },
+  shadow: {
+    positionX: {
+      dark: "translate-x-7",
+      light: "translate-x-0",
+    },
+    opacity: {
+      dark: "opacity-100",
+      light: "opacity-0",
+    },
+  },
+};
 
-  let positionX = "right-[2px]";
+const ThemeSwitch = () => {
+  const hasMounted = useHasMounted();
+  const { theme, setTheme } = useTheme();
+
+  const { sun, shadow } = switchStyles;
+
+  let positionX = hasMounted
+    ? theme === THEME_VALUE.DARK
+      ? sun.positionX.dark
+      : sun.positionX.light
+    : sun.positionX.dark;
+
+  let shadowPositionX = hasMounted
+    ? theme === THEME_VALUE.DARK
+      ? shadow.positionX.dark
+      : shadow.positionX.light
+    : shadow.positionX.dark;
+
+  let shadowOpacity = hasMounted
+    ? theme === THEME_VALUE.DARK
+      ? shadow.opacity.dark
+      : shadow.opacity.light
+    : shadow.opacity.dark;
 
   const handleSwitchTheme = () => {
+    let nextTheme = "";
     if (theme === THEME_VALUE.LIGHT) {
-      positionX = "right-[2px]";
-      setTheme(THEME_VALUE.DARK);
+      nextTheme = THEME_VALUE.DARK;
     } else {
-      positionX = "left-[2px]";
-      setTheme(THEME_VALUE.LIGHT);
+      nextTheme = THEME_VALUE.LIGHT;
     }
+
+    setTheme(nextTheme);
   };
 
   return (
-    <>
-      <select
-        value={hasMounted ? theme : THEME_VALUE.DARK}
-        onChange={e => setTheme(e.target.value)}
-      >
-        {/* <option value={THEME_VALUE.SYSTEM}>System</option> */}
-        <option value={THEME_VALUE.DARK}>Dark</option>
-        <option value={THEME_VALUE.LIGHT}>Light</option>
-      </select>
+    <div
+      className="bg-gray-800 w-14 h-7 rounded-full relative cursor-pointer"
+      onClick={handleSwitchTheme}
+    >
       <div
-        className="bg-gray-800 w-14 h-7 rounded-full relative cursor-pointer"
-        onClick={handleSwitchTheme}
-      >
-        <div
-          className={`bg-yellow-300 transition-all rounded-full w-6 h-6 absolute top-[2px] ${positionX}`}
-        ></div>
-        {/* <div className="bg-green-300 rounded-full w-6 h-6 absolute top-[2px] right-[2px]"></div> */}
-        {/* <div className="bg-yellow-300 rounded-full w-5 h-5 absolute top-1 right-3"></div> */}
-      </div>
-    </>
+        className={`bg-yellow-300 transition-transform rounded-full w-5 h-5 absolute top-[4px] ${positionX}`}
+      ></div>
+      <div
+        className={`bg-gray-800 rounded-full w-4 h-4 absolute top-1 transition-all ${shadowPositionX} ${shadowOpacity}`}
+      ></div>
+    </div>
   );
 };
 
