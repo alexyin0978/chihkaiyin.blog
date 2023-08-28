@@ -1,9 +1,11 @@
+import type { Metadata, ResolvingMetadata } from "next";
 import Link from "next/link";
 import { Merriweather, Montserrat } from "next/font/google";
 
 import {
   PostMetaData,
   getAdjacentPostsMetaDatas,
+  getAllPostsMetaDatas,
   getPost,
 } from "@/utils/readPost";
 
@@ -15,6 +17,27 @@ type PostProps = {
     post: string;
   };
 };
+
+export async function generateMetadata({
+  params,
+}: PostProps): Promise<Metadata> {
+  const { data: postMetaData } = getPost(params.post);
+  console.log(postMetaData);
+
+  return {
+    title: `CHIHKAI_YIN - ${postMetaData.title}`,
+    description: postMetaData.subtitle,
+  };
+}
+
+export async function generateStaticParams() {
+  // render dynamic route page at build time
+  const postMetaDatas = getAllPostsMetaDatas();
+
+  return postMetaDatas.map(post => ({
+    slug: post.fileName,
+  }));
+}
 
 const merriweather = Merriweather({
   weight: "300",

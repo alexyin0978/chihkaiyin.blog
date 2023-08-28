@@ -3,11 +3,6 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import { Providers as ThemeProvider } from "@/components/ThemeProvider";
 
-export const metadata = {
-  title: "YIN",
-  description: "A blog built by ChihKai Yin.",
-};
-
 export default function RootLayout({
   children,
 }: {

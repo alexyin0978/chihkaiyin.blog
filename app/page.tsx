@@ -7,6 +7,11 @@ import { getAllPostsMetaDatas, PostMetaData } from "@/utils/readPost";
 import { SelfIntro } from "@/components/SelfIntro";
 import Nav from "@/components/Nav";
 
+export const metadata = {
+  title: "CHIHKAI_YIN",
+  description: "A blog built by ChihKai Yin.",
+};
+
 const merriweather = Merriweather({
   weight: "400",
   subsets: ["latin"],
