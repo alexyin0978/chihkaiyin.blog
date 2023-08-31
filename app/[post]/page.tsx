@@ -97,8 +97,6 @@ export default function Post({ params }: PostProps) {
   const { title, date } = postMetaData as PostMetaData;
   const [prevPostMetadata, nextPostMetadata] = getAdjacentPostsMetaDatas(title);
 
-  console.log("test");
-
   return (
     <>
       <Nav
