@@ -19,7 +19,7 @@ const parseMarkdown = (path: string) => {
 export const getAllPostsMetaDatas = () => {
   const fileNames = fs.readdirSync(`${rootPath()}/post`);
   const metadatas = fileNames
-    .map(fileName => {
+    .map((fileName) => {
       const { data } = parseMarkdown(`${rootPath()}/post/${fileName}`);
 
       // add fileName to data
@@ -51,7 +51,7 @@ export const getAdjacentPostsMetaDatas = (
   const metadatas = getAllPostsMetaDatas();
 
   const currentPostIndex = metadatas.findIndex(
-    metadata => metadata.title === currentPostTitle,
+    (metadata) => metadata.title === currentPostTitle,
   );
 
   return [metadatas[currentPostIndex - 1], metadatas[currentPostIndex + 1]];
