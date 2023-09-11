@@ -7,12 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --check --ignore-path .gitignore .",
-    "prettier:fix": "if [ \"$?\" -eq \"1\" ] ; then echo \"running prettier:fix\" ; prettier --write --ignore-path .gitignore . ; else exit 0 ; fi'",
-    "prettier:check_fix": "prettier --check --ignore-path .gitignore . && if [ $? -eq 0 ]; then prettier --write --ignore-path .gitignore .; fi"
+    "prettier": "prettier --check --ignore-path .gitignore . && if [ $? -eq 1 ]; then prettier --write --ignore-path .gitignore .; fi"
   },
   "pre-commit": [
-    "prettier:check_fix"
+    "prettier"
   ],
   "dependencies": {
     "@next/font": "^13.4.9",
