@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --check --ignore-path .gitignore .",
+    "prettier:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
     "@next/font": "^13.4.9",
@@ -34,7 +36,7 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "@types/react-syntax-highlighter": "^15.5.7",
-    "prettier": "^3.0.0",
+    "prettier": "^3.0.3",
     "prettier-plugin-tailwindcss": "^0.3.0"
   }
 }
