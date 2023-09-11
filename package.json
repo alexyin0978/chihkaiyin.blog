@@ -6,7 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --check --ignore-path .gitignore .",
+    "prettier:fix": "prettier --write --ignore-path .gitignore .",
+    "pre-commit": [
+      "prettier",
+      "prettier:fix",
+      "lint"
+    ]
   },
   "dependencies": {
     "@next/font": "^13.4.9",
