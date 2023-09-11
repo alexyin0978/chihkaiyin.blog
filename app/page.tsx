@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import { Merriweather } from "next/font/google";
 import { Montserrat } from "@next/font/google";
@@ -21,7 +22,7 @@ const montserrat = Montserrat({
   subsets: ["latin"],
 });
 
-const PostListItem = (props: PostMetaData) => {
+function PostListItem(props: PostMetaData) {
   const { title, date, subtitle, fileName } = props;
   return (
     <article
@@ -40,7 +41,7 @@ const PostListItem = (props: PostMetaData) => {
       <p className="mt-2">{subtitle}</p>
     </article>
   );
-};
+}
 
 export default function Home() {
   const postMetaDatas = getAllPostsMetaDatas();

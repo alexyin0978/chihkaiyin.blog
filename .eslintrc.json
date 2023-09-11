@@ -1,9 +1,16 @@
 {
-  "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript"],
+  "extends": [
+    "next/core-web-vitals",
+    "airbnb",
+    "airbnb-typescript",
+    "prettier"
+  ],
+  "plugins": ["prettier"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
+    "prettier/prettier": ["error"],
     "jsx-quotes": ["error", "prefer-double"],
     "quotes": ["error", "double"],
     "@typescript-eslint/quotes": [
@@ -12,6 +19,7 @@
       {
         "allowTemplateLiterals": true
       }
-    ]
+    ],
+    "operator-linebreak": ["error", "before"]
   }
 }
