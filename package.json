@@ -11,8 +11,7 @@
     "prettier:fix": "prettier --write --ignore-path .gitignore ."
   },
   "pre-commit": [
-    "prettier",
-    "prettier:fix"
+    "prettier"
   ],
   "dependencies": {
     "@next/font": "^13.4.9",
