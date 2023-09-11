@@ -10,6 +10,11 @@
     "prettier": "prettier --check --ignore-path .gitignore .",
     "prettier:fix": "prettier --write --ignore-path .gitignore ."
   },
+  "pre-commit": [
+    "prettier",
+    "prettier:fix",
+    "lint"
+  ],
   "dependencies": {
     "@next/font": "^13.4.9",
     "@types/node": "20.2.6",
@@ -36,7 +41,8 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "@types/react-syntax-highlighter": "^15.5.7",
-    "prettier": "^3.0.3",
+    "pre-commit": "^1.2.2",
+    "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.3.0"
   }
 }
