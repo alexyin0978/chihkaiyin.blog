@@ -8,13 +8,13 @@
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --check --ignore-path .gitignore .",
-    "prettier:fix": "prettier --write --ignore-path .gitignore .",
-    "pre-commit": [
-      "prettier",
-      "prettier:fix",
-      "lint"
-    ]
+    "prettier:fix": "prettier --write --ignore-path .gitignore ."
   },
+  "pre-commit": [
+    "prettier",
+    "prettier:fix",
+    "lint"
+  ],
   "dependencies": {
     "@next/font": "^13.4.9",
     "@types/node": "20.2.6",
