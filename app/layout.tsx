@@ -1,5 +1,6 @@
 import "./globals.css";
 
+import React from "react";
 import Footer from "@/components/Footer";
 import { Providers as ThemeProvider } from "@/components/ThemeProvider";
 
@@ -9,7 +10,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
       <body>
         <ThemeProvider>
           <div

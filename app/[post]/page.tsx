@@ -1,4 +1,5 @@
-import type { Metadata, ResolvingMetadata } from "next";
+import React from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Merriweather, Montserrat } from "next/font/google";
 
@@ -32,7 +33,7 @@ export async function generateStaticParams() {
   // render dynamic route page at build time
   const postMetaDatas = getAllPostsMetaDatas();
 
-  return postMetaDatas.map(post => ({
+  return postMetaDatas.map((post) => ({
     slug: post.fileName,
   }));
 }
@@ -119,7 +120,7 @@ export default function Post({ params }: PostProps) {
       ${proseStyles.p} ${proseStyles.a} ${proseStyles.blockquote}
       ${proseStyles.strong} ${proseStyles.pre} ${merriweather.className}`}
         >
-          <Markdown markdown={postMarkdown} />
+          <Markdown content={postMarkdown} />
         </article>
       </main>
       <aside className="mt-14 -mb-1">

@@ -1,15 +1,16 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Merriweather } from "next/font/google";
 
-import Avatar from "/assets/avatar.jpeg";
+import Avatar from "@/assets/avatar.jpeg";
 
 const merriweather = Merriweather({
   weight: "400",
   subsets: ["latin"],
 });
 
-export const SelfIntro = () => {
+export function SelfIntro() {
   return (
     <aside className="flex items-center pb-7 mb-12 mt-10">
       {/* avatar */}
@@ -26,7 +27,7 @@ export const SelfIntro = () => {
         <p>
           Personal blog by{" "}
           <Link
-            href={"https://www.linkedin.com/in/alexyin0978/"}
+            href="https://www.linkedin.com/in/alexyin0978/"
             className="text-header dark:text-header_dark underline underline-offset-2"
           >
             ChihKai Yin
@@ -37,4 +38,4 @@ export const SelfIntro = () => {
       </div>
     </aside>
   );
-};
+}

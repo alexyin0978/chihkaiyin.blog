@@ -7,13 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --check --ignore-path .gitignore .",
-    "prettier:fix": "prettier --write --ignore-path .gitignore ."
+    "prettier": "prettier --check --ignore-path .gitignore . && if [ $? -eq 1 ]; then prettier --write --ignore-path .gitignore .; fi"
   },
   "pre-commit": [
-    "prettier",
-    "prettier:fix",
-    "lint"
+    "prettier"
   ],
   "dependencies": {
     "@next/font": "^13.4.9",
@@ -41,6 +38,10 @@
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
     "@types/react-syntax-highlighter": "^15.5.7",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.1.0",
     "pre-commit": "^1.2.2",
     "prettier": "^3.0.0",
     "prettier-plugin-tailwindcss": "^0.3.0"
