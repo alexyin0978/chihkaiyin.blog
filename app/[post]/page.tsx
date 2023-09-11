@@ -22,8 +22,6 @@ export async function generateMetadata({
   params,
 }: PostProps): Promise<Metadata> {
   const { data: postMetaData } = getPost(params.post);
-  console.log(postMetaData);
-
   return {
     title: `CHIHKAI_YIN - ${postMetaData.title}`,
     description: postMetaData.subtitle,
