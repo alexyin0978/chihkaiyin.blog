@@ -1,16 +1,10 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "airbnb",
-    "airbnb-typescript",
-    "prettier"
-  ],
-  "plugins": ["prettier"],
+  "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
   "rules": {
-    "prettier/prettier": ["error"],
+    "react/jsx-props-no-spreading": "off",
     "jsx-quotes": ["error", "prefer-double"],
     "quotes": ["error", "double"],
     "@typescript-eslint/quotes": [
@@ -20,6 +14,16 @@
         "allowTemplateLiterals": true
       }
     ],
-    "operator-linebreak": ["error", "before"]
+    "operator-linebreak": [
+      "error",
+      "after",
+      { "overrides": { "?": "before", ":": "before" } }
+    ],
+    "object-curly-newline": "off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/prefer-default-export": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/require-default-props": "off",
+    "jsx-a11y/click-events-have-key-events": "off"
   }
 }

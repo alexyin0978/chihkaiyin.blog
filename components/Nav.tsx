@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import { Montserrat } from "@next/font/google";
 
@@ -20,7 +21,7 @@ export default function Nav({
   return (
     <nav className="flex justify-between items-center h-10">
       <Link
-        href={"/"}
+        href="/"
         className={`${titleSize} font-extrabold ${titleColor} ${montserrat.className}`}
       >
         {pageTitle}

@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useTheme } from "next-themes";
 import { useHasMounted } from "@/hooks";
 
@@ -28,29 +29,35 @@ const switchStyles = {
   },
 };
 
-const ThemeSwitch = () => {
+function ThemeSwitch() {
   const hasMounted = useHasMounted();
   const { theme, setTheme } = useTheme();
 
   const { sun, shadow } = switchStyles;
 
-  let positionX = hasMounted
-    ? theme === THEME_VALUE.DARK
-      ? sun.positionX.dark
-      : sun.positionX.light
-    : sun.positionX.dark;
+  const processPositionX = () => {
+    if (!hasMounted) return sun.positionX.dark;
+    if (theme === THEME_VALUE.DARK) {
+      return sun.positionX.dark;
+    }
+    return sun.positionX.light;
+  };
 
-  let shadowPositionX = hasMounted
-    ? theme === THEME_VALUE.DARK
-      ? shadow.positionX.dark
-      : shadow.positionX.light
-    : shadow.positionX.dark;
+  const processShadowPositionX = () => {
+    if (!hasMounted) return shadow.positionX.dark;
+    if (theme === THEME_VALUE.DARK) {
+      return shadow.positionX.dark;
+    }
+    return shadow.positionX.light;
+  };
 
-  let shadowOpacity = hasMounted
-    ? theme === THEME_VALUE.DARK
-      ? shadow.opacity.dark
-      : shadow.opacity.light
-    : shadow.opacity.dark;
+  const processShadowOpacity = () => {
+    if (!hasMounted) return shadow.opacity.dark;
+    if (theme === THEME_VALUE.DARK) {
+      return shadow.opacity.dark;
+    }
+    return shadow.opacity.light;
+  };
 
   const handleSwitchTheme = () => {
     let nextTheme = "";
@@ -64,18 +71,19 @@ const ThemeSwitch = () => {
   };
 
   return (
-    <div
+    <button
+      type="button"
       className="bg-gray-800 w-14 h-7 rounded-full relative cursor-pointer"
       onClick={handleSwitchTheme}
     >
       <div
-        className={`bg-yellow-300 transition-transform rounded-full w-5 h-5 absolute top-[4px] ${positionX}`}
-      ></div>
+        className={`bg-yellow-300 transition-transform rounded-full w-5 h-5 absolute top-[4px] ${processPositionX()}`}
+      />
       <div
-        className={`bg-gray-800 rounded-full w-4 h-4 absolute top-1 transition-all ${shadowPositionX} ${shadowOpacity}`}
-      ></div>
-    </div>
+        className={`bg-gray-800 rounded-full w-4 h-4 absolute top-1 transition-all ${processShadowPositionX()} ${processShadowOpacity()}`}
+      />
+    </button>
   );
-};
+}
 
 export default ThemeSwitch;
