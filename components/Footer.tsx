@@ -14,7 +14,7 @@ const mediaLinks = [
 
 export default function Footer() {
   return (
-    <footer>
+    <footer data-testid="footer">
       <div className="h-44">{/* invisible height */}</div>
       <div className="absolute bottom-0 h-14 px-5 left-0 text-sm text-pageTitle dark:text-pageTitle_dark font-light pt-5 pb-3 w-full flex justify-between items-center">
         <p>© 2023 ChihKai Yin</p>
