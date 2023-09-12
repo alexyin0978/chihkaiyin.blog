@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier:check": "prettier --check --ignore-path .gitignore .",
+    "prettier:list-diff": "prettier --list-different --ignore-path .gitignore .",
     "prettier:fix": "prettier --write --ignore-path .gitignore .",
-    "prettier": "npm run prettier:check && if [ $? -eq 1 ]; then npm run prettier:fix; fi"
+    "prettier": "prettier --list-different --ignore-path .gitignore . | xargs -I {} prettier --write {}"
   },
   "pre-commit": [
     "prettier"
