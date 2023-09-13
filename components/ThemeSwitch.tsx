@@ -36,7 +36,6 @@ function ThemeSwitch() {
   const { sun, shadow } = switchStyles;
 
   const processPositionX = () => {
-    if (!hasMounted) return sun.positionX.dark;
     if (theme === THEME_VALUE.DARK) {
       return sun.positionX.dark;
     }
@@ -44,7 +43,6 @@ function ThemeSwitch() {
   };
 
   const processShadowPositionX = () => {
-    if (!hasMounted) return shadow.positionX.dark;
     if (theme === THEME_VALUE.DARK) {
       return shadow.positionX.dark;
     }
@@ -52,7 +50,6 @@ function ThemeSwitch() {
   };
 
   const processShadowOpacity = () => {
-    if (!hasMounted) return shadow.opacity.dark;
     if (theme === THEME_VALUE.DARK) {
       return shadow.opacity.dark;
     }
@@ -70,8 +67,12 @@ function ThemeSwitch() {
     setTheme(nextTheme);
   };
 
+  // do this to prevent hydration error
+  if (!hasMounted) return null;
+
   return (
     <button
+      data-testid="theme-switch"
       type="button"
       className="bg-gray-800 w-14 h-7 rounded-full relative cursor-pointer"
       onClick={handleSwitchTheme}

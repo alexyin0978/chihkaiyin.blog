@@ -8,7 +8,7 @@ import { render, screen } from "@testing-library/react";
 import Footer, { mediaLinks } from "./Footer";
 
 describe("Footer", () => {
-  it("renders the Footer component properly", () => {
+  it("renders Footer component properly", () => {
     render(<Footer />);
 
     expect(screen.getByTestId("footer")).toBeInTheDocument();
