@@ -9,8 +9,8 @@ export interface PostMetaData {
   date: string;
 }
 
-const OFFICIAL_POST_PATH = "post";
-// const TEST_POST_PATH = "post_test";
+const POSTS_DIR = "post";
+// const POSTS_DIR = "post_test";
 
 const rootPath = () => process.cwd();
 
@@ -20,12 +20,11 @@ const parseMarkdown = (path: string) => {
 };
 
 export const getAllPostsMetaDatas = () => {
-  const fileNames = fs.readdirSync(`${rootPath()}/${OFFICIAL_POST_PATH}`);
+  const fileNames = fs.readdirSync(`${rootPath()}/${POSTS_DIR}`);
+
   const metadatas = fileNames
     .map((fileName) => {
-      const { data } = parseMarkdown(
-        `${rootPath()}/${OFFICIAL_POST_PATH}/${fileName}`,
-      );
+      const { data } = parseMarkdown(`${rootPath()}/${POSTS_DIR}/${fileName}`);
 
       // add fileName to data
       const fileNameWithoutExtension = fileName.split(".")[0];
@@ -37,18 +36,17 @@ export const getAllPostsMetaDatas = () => {
       const date1 = dayjs(post1.date, "YYYY-MM-DD");
       const date2 = dayjs(post2.date, "YYYY-MM-DD");
 
-      const isDate1BeforeDate2 = date1.isBefore(date2);
+      const isDate1AfterDate2 = date1.isAfter(date2);
 
-      return isDate1BeforeDate2 ? -1 : 1;
-    })
-    .reverse();
+      return isDate1AfterDate2 ? -1 : 1;
+    });
 
   return metadatas;
 };
 
 export const getPost = (post: string) =>
   // eslint-disable-next-line implicit-arrow-linebreak
-  parseMarkdown(`${rootPath()}/${OFFICIAL_POST_PATH}/${post}.md`);
+  parseMarkdown(`${rootPath()}/${POSTS_DIR}/${post}.md`);
 
 export const getAdjacentPostsMetaDatas = (
   currentPostTitle: string,

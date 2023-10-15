@@ -44,6 +44,8 @@ function PostListItem(props: PostMetaData) {
 export default function Home() {
   const postMetaDatas = getAllPostsMetaDatas();
 
+  // console.log("postMetaDatas: ", postMetaDatas);
+
   return (
     <>
       <Nav />
