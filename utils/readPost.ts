@@ -9,7 +9,9 @@ export interface PostMetaData {
   date: string;
 }
 
-const rootPath = () => process.cwd();
+const rootPath = () => {
+  return process.cwd();
+};
 
 const parseMarkdown = (path: string) => {
   const markdown = fs.readFileSync(path, "utf-8");
@@ -50,9 +52,9 @@ export const getAdjacentPostsMetaDatas = (
 ): [PostMetaData | undefined, PostMetaData | undefined] => {
   const metadatas = getAllPostsMetaDatas();
 
-  const currentPostIndex = metadatas.findIndex(
-    (metadata) => metadata.title === currentPostTitle,
-  );
+  const currentPostIndex = metadatas.findIndex((metadata) => {
+    return metadata.title === currentPostTitle;
+  });
 
   return [metadatas[currentPostIndex - 1], metadatas[currentPostIndex + 1]];
 };

@@ -4,7 +4,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import rangeParser from "parse-numeric-range";
 
-import { useHasMounted } from "@/hooks";
+import { useHasMounted } from "@/hooks/useHasMounted";
 
 // NOTE: SyntaxHighlighter is a client component
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
