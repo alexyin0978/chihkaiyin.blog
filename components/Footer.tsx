@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const mediaLinks = [
   {
-    type: "Linkedin",
+    type: "LinkedIn",
     link: "https://www.linkedin.com/in/alexyin0978/",
   },
   {

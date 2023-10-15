@@ -41,7 +41,7 @@ function PostListItem(props: PostMetaData) {
   );
 }
 
-export default async function Home() {
+export default function Home() {
   const postMetaDatas = getAllPostsMetaDatas();
 
   return (
@@ -50,14 +50,12 @@ export default async function Home() {
       <SelfIntro />
       <main>
         {postMetaDatas.length !== 0 &&
-          postMetaDatas.map((topic) => {
-            return (
-              <PostListItem
-                key={topic.title + topic.date}
-                {...topic}
-              />
-            );
-          })}
+          postMetaDatas.map((topic) => (
+            <PostListItem
+              key={topic.title + topic.date}
+              {...topic}
+            />
+          ))}
       </main>
     </>
   );

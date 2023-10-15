@@ -9,9 +9,10 @@ export interface PostMetaData {
   date: string;
 }
 
-const rootPath = () => {
-  return process.cwd();
-};
+const OFFICIAL_POST_PATH = "post";
+// const TEST_POST_PATH = "post_test";
+
+const rootPath = () => process.cwd();
 
 const parseMarkdown = (path: string) => {
   const markdown = fs.readFileSync(path, "utf-8");
@@ -19,10 +20,12 @@ const parseMarkdown = (path: string) => {
 };
 
 export const getAllPostsMetaDatas = () => {
-  const fileNames = fs.readdirSync(`${rootPath()}/post`);
+  const fileNames = fs.readdirSync(`${rootPath()}/${OFFICIAL_POST_PATH}`);
   const metadatas = fileNames
     .map((fileName) => {
-      const { data } = parseMarkdown(`${rootPath()}/post/${fileName}`);
+      const { data } = parseMarkdown(
+        `${rootPath()}/${OFFICIAL_POST_PATH}/${fileName}`,
+      );
 
       // add fileName to data
       const fileNameWithoutExtension = fileName.split(".")[0];
@@ -43,18 +46,18 @@ export const getAllPostsMetaDatas = () => {
   return metadatas;
 };
 
-export const getPost = (post: string) => {
-  return parseMarkdown(`${rootPath()}/post/${post}.md`);
-};
+export const getPost = (post: string) =>
+  // eslint-disable-next-line implicit-arrow-linebreak
+  parseMarkdown(`${rootPath()}/${OFFICIAL_POST_PATH}/${post}.md`);
 
 export const getAdjacentPostsMetaDatas = (
   currentPostTitle: string,
 ): [PostMetaData | undefined, PostMetaData | undefined] => {
   const metadatas = getAllPostsMetaDatas();
 
-  const currentPostIndex = metadatas.findIndex((metadata) => {
-    return metadata.title === currentPostTitle;
-  });
+  const currentPostIndex = metadatas.findIndex(
+    (metadata) => metadata.title === currentPostTitle,
+  );
 
   return [metadatas[currentPostIndex - 1], metadatas[currentPostIndex + 1]];
 };
