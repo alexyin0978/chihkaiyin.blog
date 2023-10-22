@@ -1,7 +1,7 @@
 ---
 title: "Turn .mov into GIF using ffmpeg and imagemagick"
 subtitle: "Turn the .mov file into a .gif file using ffmpeg and imagemagick"
-date: "2023-10-18"
+date: "2023-10-22"
 tag: "movie,gif,bash,imagemagick,ffmpeg"
 ---
 
