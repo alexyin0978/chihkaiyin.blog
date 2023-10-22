@@ -9,8 +9,28 @@ import { SelfIntro } from "@/components/SelfIntro";
 import Nav from "@/components/Nav";
 
 export const metadata = {
-  title: "CHIHKAI_YIN",
+  title: {
+    default: "CHIHKAI_YIN",
+    template: "%s",
+  },
+  metadataBase: new URL("https://chihkaiyin.blog"),
+  creator: "ChihKai Yin",
   description: "A blog built by ChihKai Yin.",
+  openGraph: {
+    title: "ChihKai Yin",
+    description: "I write things I have learned.",
+    url: "https://chihkaiyin.blog",
+    siteName: "CHIHKAI_YIN.blog",
+    locale: "en-US",
+    type: "website",
+  },
+  twitter: {
+    title: "ChihKai Yin",
+    site: "@alexyin0978",
+    creator: "@alexyin0978",
+    card: "summary_large_image",
+    description: "I write things I have learned.",
+  },
 };
 
 const merriweather = Merriweather({
