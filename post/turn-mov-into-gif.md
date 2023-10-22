@@ -33,7 +33,6 @@ Specify where the output images should go, in this example, I am going to put th
 ```bash
 # syntax
 $ ffmpeg -i [INPUT_FILE.mov] -vf "fps=[ASSIGN_A_INTEGER_HERE]" ./output/[OUTPUT_FILE_NAME_%3d.[FILE_EXTENSION]]
-
 ```
 
 In the above script, `-i` infers to “input file”, `-vf` infers to “video frame” and `fps` infers to “frame per second”. 
