@@ -1,6 +1,6 @@
 ---
 title: "Hello World Express TypeScript server"
-subtitle: "In this article, I record all the steps I took and bugs I bombed into while setting up and deploying an express typescript server."
+subtitle: "Setup and deploy an express typescript server"
 date: "2023-10-18"
 tag: "express,typescript,npm"
 ---
