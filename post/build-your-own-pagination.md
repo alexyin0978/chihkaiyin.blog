@@ -111,7 +111,7 @@ After all basic settings, our project tree should now looks like this:
 
 Let’s use MUI Pagination as our reference, your can try the [MUI demo](https://mui.com/material-ui/react-pagination/#buttons) in order to get deeper understanding on what we are going to discuss later.
 
-<img src="./assets/build-your-own-pagination/demo.png" alt="截圖 2023-10-19 上午12.49.32.png" width="400"/>
+<img src="../assets/post/build-your-own-pagination/demo.png" alt="截圖 2023-10-19 上午12.49.32.png" width="400"/>
 
 As the image shown above, the component can break into 5 parts:
 
@@ -293,7 +293,7 @@ Third, there should be some limitation on “first-page button”, “previous-p
 
 Now our Pagination should function well:
 
-<img src="./assets/build-your-own-pagination/demo_2.gif" width="400" alt="demo_2"/>
+<img src="../assets/post/build-your-own-pagination/demo_2.gif" width="400" alt="demo_2"/>
 
 ## When to show the break label?
 
@@ -305,7 +305,7 @@ So, how do we deal with that?
 
 Some people have come up with a smart way to solve this problem: only show the crucial pages we need to see, that is, the “boundary-pages”, “sibling-pages” and “current-page”, while the rest parts, hide it, show the “break-label” as placeholder instead.
 
-<img src="./assets/build-your-own-pagination/demo_3.gif" width="400" alt="demo_3"/>
+<img src="../assets/post/build-your-own-pagination/demo_3.gif" width="400" alt="demo_3"/>
 
 To achieve that, we need to do some calculation to our `pageList`.
 
@@ -411,19 +411,19 @@ There are 4 possible cases of combination between page numbers and break labels:
 
 1. Showing all the pages:
 
-<img src="./assets/build-your-own-pagination/demo_4.png" width="320" alt="demo_4"/>
+<img src="../assets/post/build-your-own-pagination/demo_4.png" width="320" alt="demo_4"/>
 
 1. Showing break label on the right:
 
-<img src="./assets/build-your-own-pagination/demo_5.png" width="400" alt="demo_5"/>
+<img src="../assets/post/build-your-own-pagination/demo_5.png" width="400" alt="demo_5"/>
 
 1. Showing break label on the left:
 
-<img src="./assets/build-your-own-pagination/demo_6.png" width="400" alt="demo_6"/>
+<img src="../assets/post/build-your-own-pagination/demo_6.png" width="400" alt="demo_6"/>
 
 1. Showing break labels on both side:
 
-<img src="./assets/build-your-own-pagination/demo_7.png" width="400" alt="demo_7"/>
+<img src="../assets/post/build-your-own-pagination/demo_7.png" width="400" alt="demo_7"/>
 
 Let’s discuss conditions which trigger each cases:
 
@@ -443,27 +443,27 @@ This extra page button will be place next to the extreme sibling button, while i
 
 Fig 1
 
-<img src="./assets/build-your-own-pagination/demo_8.png" width="400" alt="demo_8"/>
+<img src="../assets/post/build-your-own-pagination/demo_8.png" width="400" alt="demo_8"/>
 
 when current page is 3, the left boundary will be page 1, the sibling will be page 2 and 4, while the extra buffer page will be page 5, the rest will be hidden except for the right boundary page 8.
 
 FIg 2
 
-<img src="./assets/build-your-own-pagination/demo_9.png" width="400" alt="demo_9"/>
+<img src="../assets/post/build-your-own-pagination/demo_9.png" width="400" alt="demo_9"/>
 
 when current page is 4, the left boundary will be page 1, the sibling will be page 3 and 5, while the extra buffer page goes to page 2 because the sum of page 6 and page 7 is 2, which is greater than the buffer count 1, so those 2 pages will be hidden.
 
 Fig 3
 
-<img src="./assets/build-your-own-pagination/demo_10.png" width="400" alt="demo_10"/>
+<img src="../assets/post/build-your-own-pagination/demo_10.png" width="400" alt="demo_10"/>
 
 now the current page goes to 5, the left boundary will be page 1, the sibling will be page 4 and 6, while the extra buffer page goes to page 7 because the sum of page 2 and page 3 is 2, which is greater than the buffer count 1, so those 2 pages will be hidden.
 
 Fig 4 & 5
 
-<img src="./assets/build-your-own-pagination/demo_11.png" width="400" alt="demo_11"/>
+<img src="../assets/post/build-your-own-pagination/demo_11.png" width="400" alt="demo_11"/>
 
-<img src="./assets/build-your-own-pagination/demo_12.png" width="400" alt="demo_12"/>
+<img src="../assets/post/build-your-own-pagination/demo_12.png" width="400" alt="demo_12"/>
 
 you might be thinking, what if the current page is at either page 1 or 2, how do we calculate the boundary and sibling when they are overlap? Well, in these cases, we still leave spaces for the boundary and siblings, so as you can see, when current page goes to 2 or 1, pages that are hidden still goes to page 6 and 7.
 
@@ -672,7 +672,7 @@ And here’s the [demo link](https://build-your-own-pagination.vercel.app/), fee
 
 Thanks for reading 🎉
 
-<img src="./assets/build-your-own-pagination/demo_13.gif" width="300" alt="demo_13"/>
+<img src="../assets/post/build-your-own-pagination/demo_13.gif" width="300" alt="demo_13"/>
 
 ## References
 
