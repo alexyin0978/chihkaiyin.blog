@@ -111,8 +111,7 @@ After all basic settings, our project tree should now looks like this:
 
 Let’s use MUI Pagination as our reference, your can try the [MUI demo](https://mui.com/material-ui/react-pagination/#buttons) in order to get deeper understanding on what we are going to discuss later.
 
-<!-- <img src="../assets/post/build-your-own-pagination/demo.png" alt="截圖 2023-10-19 上午12.49.32.png" width="400"/> -->
-<!-- ![image](../assets/post/build-your-own-pagination/demo.png){:class="w-[400px]"} -->
+![demo.png](/post/build-your-own-pagination/demo.png)
 
 As the image shown above, the component can break into 5 parts:
 
@@ -188,7 +187,7 @@ type PaginationProps = {
 }
 ```
 
-1. `totolPageCount` : should be a positive integer number, allows Pagination to know how many pages it has to generate. In real life project, it usually comes from data received from the server. 
+1. `totalPageCount` : should be a positive integer number, allows Pagination to know how many pages it has to generate. In real life project, it usually comes from data received from the server. 
 2. `currentPage` : should be a react-state passed from parent, telling Pagination which page is currently active.
 3. `onChange` : an event triggered whichever the button is clicked, noted that `onChange` should receive the “next-page number” as param.
 4. `siblingCount` : For example, if `currentPage` is 8, while `siblingCount` is 2, the left and right siblings page will be 6, 7, 9 and 10. Optional.
@@ -199,7 +198,7 @@ With the props above, our parent can now fully control the Pagination.
 
 ## Code our Pagination
 
-After parent and props of Pagination are all settled , let’s start writing some code in `Pagniation.tsx`:
+After parent and props of Pagination are all settled , let’s start writing some code in `Pagination.tsx`:
 
 ```tsx
 // Pagination.tsx
@@ -294,7 +293,7 @@ Third, there should be some limitation on “first-page button”, “previous-p
 
 Now our Pagination should function well:
 
-<!-- <img src="../assets/post/build-your-own-pagination/demo_2.gif" width="400" alt="demo_2"/> -->
+![demo_2.gif](/post/build-your-own-pagination/demo_2.gif =100x)
 
 ## When to show the break label?
 
@@ -306,7 +305,7 @@ So, how do we deal with that?
 
 Some people have come up with a smart way to solve this problem: only show the crucial pages we need to see, that is, the “boundary-pages”, “sibling-pages” and “current-page”, while the rest parts, hide it, show the “break-label” as placeholder instead.
 
-<!-- <img src="../assets/post/build-your-own-pagination/demo_3.gif" width="400" alt="demo_3"/> -->
+![demo_3.gif](/post/build-your-own-pagination/demo_3.gif)
 
 To achieve that, we need to do some calculation to our `pageList`.
 
@@ -414,19 +413,19 @@ There are 4 possible cases of combination between page numbers and break labels:
 
 1. Showing all the pages:
 
-<!-- <img src="../assets/post/build-your-own-pagination/demo_4.png" width="320" alt="demo_4"/> -->
+![demo_4](/post/build-your-own-pagination/demo_4.png)
 
-1. Showing break label on the right:
+2. Showing break label on the right:
 
-<!-- <img src="../assets/post/build-your-own-pagination/demo_5.png" width="400" alt="demo_5"/> -->
+![demo_5](/post/build-your-own-pagination/demo_5.png)
 
-1. Showing break label on the left:
+3. Showing break label on the left:
 
-<!-- <img src="../assets/post/build-your-own-pagination/demo_6.png" width="400" alt="demo_6"/> -->
+![demo_6](/post/build-your-own-pagination/demo_6.png)
 
-1. Showing break labels on both side:
+4. Showing break labels on both side:
 
-<!-- <img src="../assets/post/build-your-own-pagination/demo_7.png" width="400" alt="demo_7"/> -->
+![demo_7](/post/build-your-own-pagination/demo_7.png)
 
 Let’s discuss conditions which trigger each cases:
 
@@ -446,27 +445,27 @@ This extra page button will be place next to the extreme sibling button, while i
 
 Fig 1
 
-<!-- <img src="../assets/post/build-your-own-pagination/demo_8.png" width="400" alt="demo_8"/> -->
+![demo_8](/post/build-your-own-pagination/demo_8.png)
 
 when current page is 3, the left boundary will be page 1, the sibling will be page 2 and 4, while the extra buffer page will be page 5, the rest will be hidden except for the right boundary page 8.
 
-FIg 2
+Fig 2
 
-<!-- <img src="../assets/post/build-your-own-pagination/demo_9.png" width="400" alt="demo_9"/> -->
+![demo_9](/post/build-your-own-pagination/demo_9.png)
 
 when current page is 4, the left boundary will be page 1, the sibling will be page 3 and 5, while the extra buffer page goes to page 2 because the sum of page 6 and page 7 is 2, which is greater than the buffer count 1, so those 2 pages will be hidden.
 
 Fig 3
 
-<!-- <img src="../assets/post/build-your-own-pagination/demo_10.png" width="400" alt="demo_10"/> -->
+![demo_10](/post/build-your-own-pagination/demo_10.png)
 
 now the current page goes to 5, the left boundary will be page 1, the sibling will be page 4 and 6, while the extra buffer page goes to page 7 because the sum of page 2 and page 3 is 2, which is greater than the buffer count 1, so those 2 pages will be hidden.
 
 Fig 4 & 5
 
-<!-- <img src="../assets/post/build-your-own-pagination/demo_11.png" width="400" alt="demo_11"/> -->
+![demo_11](/post/build-your-own-pagination/demo_11.png)
 
-<!-- <img src="../assets/post/build-your-own-pagination/demo_12.png" width="400" alt="demo_12"/> -->
+![demo_12](/post/build-your-own-pagination/demo_12.png)
 
 you might be thinking, what if the current page is at either page 1 or 2, how do we calculate the boundary and sibling when they are overlap? Well, in these cases, we still leave spaces for the boundary and siblings, so as you can see, when current page goes to 2 or 1, pages that are hidden still goes to page 6 and 7.
 
@@ -676,7 +675,7 @@ And here’s the [demo link](https://build-your-own-pagination.vercel.app/), fee
 
 Thanks for reading 🎉
 
-<!-- <img src="../assets/post/build-your-own-pagination/demo_13.gif" width="300" alt="demo_13"/> -->
+![demo_13](/post/build-your-own-pagination/demo_13.gif)
 
 ## References
 
