@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* styling for markdown inline code */
-/* TODO: find a more efficiant way to style inline-code */
-.p__inline-code {
+.inline-code {
   @apply before:content-none after:content-none bg-yellow-300 dark:bg-[#737c99] text-black dark:text-gray-300 bg-opacity-20 rounded-sm px-1 font-light text-base py-[2px] mx-[1px];
 }

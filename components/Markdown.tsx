@@ -90,7 +90,7 @@ export default function Markdown({ content }: { content: string }) {
       </SyntaxHighlighter>
     ) : (
       <code
-        className={`${className} p__inline-code`}
+        className={`${className} inline-code`}
         {...props}
       >
         {children}
