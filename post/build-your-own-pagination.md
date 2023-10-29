@@ -1,11 +1,11 @@
 ---
 title: "Let’s make our own Pagination!"
-subtitle: "Implement a Pagination from scratch using React and ChakraUI"
+subtitle: "Build a Pagination from scratch using React and ChakraUI"
 date: "2023-10-24"
 tag: "react,typescript,vite,chakraUI"
 ---
 
-In this article, I record steps I took to implement a state-controlled Pagination component from scratch using React, Vite, ChakraUI and react-icons.
+In this article, I record steps I took to build a state-controlled Pagination component from scratch using React, Vite, ChakraUI and react-icons.
 
 ### TL:DR
 
