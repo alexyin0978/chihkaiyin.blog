@@ -28,18 +28,18 @@ Now we can start the conversion.
 
 Select a `.mov` file, and convert it into frames of `.png` files.
 
-Specify where the output images should go, in this example, I am going to put them into a directory called `output` , while the images will be named `output_%3d.png` , by assigning `%3d`, I am telling `ffmpeg` to give my output images index, eg: `output_001.png` , `output_002.png` …etc.
+Specify where the output images should go, in this example, I am going to put them into a directory called `output` , while the images will be named `output_%3d.png` , by assigning `%03d`, I am telling `ffmpeg` to give my output images index, eg: `output_001.png` , `output_002.png` …etc.
 
 ```bash
 # syntax
-$ ffmpeg -i [INPUT_FILE.mov] -vf "fps=[ASSIGN_A_INTEGER_HERE]" ./output/[OUTPUT_FILE_NAME_%3d.[FILE_EXTENSION]]
+$ ffmpeg -i [INPUT_FILE.mov] -vf "fps=[ASSIGN_A_INTEGER_HERE]" ./output/[OUTPUT_FILE_NAME_%03d.[FILE_EXTENSION]]
 ```
 
 In the above script, `-i` infers to “input file”, `-vf` infers to “video frame” and `fps` infers to “frame per second”. 
 
 ```bash
 # example
-$ ffmpeg -i movie.mov -vf "fps=15" ./output/output_%3d.png
+$ ffmpeg -i movie.mov -vf "fps=15" ./output/output_%03d.png
 ```
 
 So, in the above example, the `fps` is 15, while the movie file is 5 seconds long, the output images count should be 15*5 = 75 frames in total.
