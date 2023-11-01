@@ -12,7 +12,8 @@ In this article, I record steps I took to build a state-controlled Pagination co
 - Project setting
 - Design Pagination props
 - Code our Pagination
-- When to show the break label
+- When to show the break label?
+- Implement `usePaginationList`
 - Wrap up
 - References
 
@@ -91,7 +92,7 @@ export default App;
 
 After all basic settings, our project tree should now looks like this:
 
-```bash
+```tsx
 .
 ├── README.md
 ├── index.html
@@ -109,14 +110,14 @@ After all basic settings, our project tree should now looks like this:
 
 ## Design Pagination props
 
-Let’s use MUI Pagination as our reference, your can try the [MUI demo](https://mui.com/material-ui/react-pagination/#buttons) in order to get deeper understanding on what we are going to discuss later.
+Let’s use MUI Pagination as our reference, your can try the [MUI demo](https://mui.com/material-ui/react-pagination/#buttons) in order to get deeper understanding on what we are going to build later.
 
-![demo.png](/post/build-your-own-pagination/demo.png)
+![fig_1.png](/post/build-your-own-pagination/fig_1.png)
 
 As the image shown above, the component can break into 5 parts:
 
 1. firstPageButton: when clicked, go back to page 1 
-2. previousPageButton: when clicked, go back to a page before
+2. prevPageButton: when clicked, go back to a page before
 3. pageList: all the page numbers, including the `...` break label
 4. nextPageButton: when clicked, go to next page 
 5. lastPageButton: when clicked, go to last page
@@ -125,12 +126,14 @@ And…
 
 Let’s look deeper into “pageList”, it can break into 4 parts:
 
+![fig_2.png](/post/build-your-own-pagination/fig_2.png)
+
 1. boundary pages: which is page 1 and page 10 in the above image
 2. breakLabel: which is `...`  in the above image.
 3. sibling pages: which is page 4 and page 6 in the above image.
 4. currentPage: which is page 5 in the above image.
 
-To enable the parent to fully control the Pagination, the Pagination should expose these props to the parent:
+To enable parent to fully control the Pagination, the Pagination should at least expose these props to the parent:
 
 ```tsx
 // App.tsx
@@ -175,7 +178,7 @@ So, our Pagination props type should look like this:
 
 ```tsx
 type PaginationProps = {
-  totalPageCount: number;
+	totalPageCount: number;
   currentPage: number;
   onChange: (page: number) => void;
   siblingCount?: number;
@@ -187,18 +190,18 @@ type PaginationProps = {
 }
 ```
 
-1. `totalPageCount` : should be a positive integer number, allows Pagination to know how many pages it has to generate. In real life project, it usually comes from data received from the server. 
+1. `totolPageCount` : should be a positive integer number, allows Pagination to know how many pages it has to generate. In real life project, it usually comes from data received from the server. 
 2. `currentPage` : should be a react-state passed from parent, telling Pagination which page is currently active.
 3. `onChange` : an event triggered whichever the button is clicked, noted that `onChange` should receive the “next-page number” as param.
 4. `siblingCount` : For example, if `currentPage` is 8, while `siblingCount` is 2, the left and right siblings page will be 6, 7, 9 and 10. Optional.
 5. `boundaryCount` : For example, if `boundaryCount` is 2, while `totalPageCount` is 10, the left and right boundary pages will be page 1, 2, 9 and 10. Optional.
-6. the rest four booleans pretty much demonstrate their purpose by their names. Also Optional.
+6. the rest four booleans pretty much demonstrate their purpose by their names. Optional.
 
-With the props above, our parent can now fully control the Pagination.
+With the props type above, let’s start coding the Pagination.
 
 ## Code our Pagination
 
-After parent and props of Pagination are all settled , let’s start writing some code in `Pagination.tsx`:
+After parent and props of Pagination are all settled , let’s start writing some code in `Pagniation.tsx` :
 
 ```tsx
 // Pagination.tsx
@@ -293,7 +296,7 @@ Third, there should be some limitation on “first-page button”, “previous-p
 
 Now our Pagination should function well:
 
-![demo_2.gif](/post/build-your-own-pagination/demo_2.gif =100x)
+![my_demo_init.gif](/post/build-your-own-pagination/my_demo_init.gif)
 
 ## When to show the break label?
 
@@ -305,15 +308,19 @@ So, how do we deal with that?
 
 Some people have come up with a smart way to solve this problem: only show the crucial pages we need to see, that is, the “boundary-pages”, “sibling-pages” and “current-page”, while the rest parts, hide it, show the “break-label” as placeholder instead.
 
-![demo_3.gif](/post/build-your-own-pagination/demo_3.gif)
+![mui_demo.gif](/post/build-your-own-pagination/mui_demo.gif)
 
 To achieve that, we need to do some calculation to our `pageList`.
 
-What we will do, is to implement a `usePaginationList` hook, which takes in `totalPageCount` , `currentPage` , `siblingCount` and `boundaryCount` as params, and return a list for us. The list should look something like this:
+What we will do, is to implement a `usePaginationList` hook, which takes in `totalPageCount` , `currentPage` , `siblingCount` and `boundaryCount` as params, and return an array for us. The purpose of the hook is to help us do the ugly calculation to decide which pages should be shown and which should be hide.
+
+The returned array will look something like this:
 
  `[1, <BreakLabel />, 4, 5, 6, <BreakLabel />, 9]`
 
-An array which contains all we need to render as `pageList` on screen: the “should-show” page numbers and the “break-label” for the rest “should-hide” parts.
+It should contain all we need to render as `pageList` on screen: 
+
+the “should-show” page numbers and the “break-label” for the rest “should-hide” parts.
 
 Our Pagination code will look like this:
 
@@ -339,7 +346,7 @@ const Pagination = (props: PaginationProps) => {
   const firstPage = 1;
   const lastPage = totalPageCount;
 
-	/* ... */
+	// ...
 
   return (
     <Flex alignItems={"center"} gap={2}>
@@ -362,11 +369,11 @@ const Pagination = (props: PaginationProps) => {
 export default Pagination;
 ```
 
-Iterate over the `pageList` return by the `usePaginationList` hook, render the page number if the type of list item is number, or else we render the item as JSX element, which will be the “break-label” component. 
+Iterate over the `pageList` return by the `usePaginationList` hook, render the page number if the type of list item is `number`, or else we render the item as JSX element, which will be the “break-label” component. 
 
 ### `BreakLabel` component and `genArrayOfNumbers` function
 
-Before we start discussing the logic behind `usePaginationList`, we can implement `<BreakLabel />` and `genArrayOfNumbers` first.
+Before we start building the calculation behind `usePaginationList`, we can implement `<BreakLabel />` and `genArrayOfNumbers` first.
 
  `<BreakLabel />` will simply be a component which renders `...` on screen.
 
@@ -376,11 +383,10 @@ Before we start discussing the logic behind `usePaginationList`, we can implemen
 import { Text } from "@chakra-ui/layout";
 
 const BreakLabel = () => {
-  const label = &#8230;
-
+	const dots = &#8230;
   return (
     <Text textAlign={"center"} w={8}>
-      {label}
+      {dots}
     </Text>
   );
 };
@@ -393,87 +399,61 @@ export default BreakLabel;
 ```tsx
 // genArrayOfNumbers.ts
 
-export const genArrayOfNumbers = (startNum: number, endNum: number) => {
+const genArrayOfNumbers = (startNum: number, endNum: number) => {
   const length = endNum - startNum + 1;
   return Array.from({ length }, (_, i) => startNum + i);
 };
 
 // for example:
 console.log(genArrayOfNumbers(2, 5));
-// should log: [2, 3, 4, 5];
+// log: [2, 3, 4, 5];
 ```
 
 Having these done, we can now start our construction on `usePaginationList` hook!
 
-### Implement `usePaginationList`
+## Implement `usePaginationList`
 
-As the explanation above, the `usePaginationList` should take in 4 params: `totalPageCount` , `currentPage` , `siblingCount` and `boundaryCount` , and return a `pageList` array which contains page numbers to render and the `<BreakLabel />` , if needed.
+As the explanation above, the `usePaginationList` should take in 4 params: `totalPageCount` , `currentPage` , `siblingCount` and `boundaryCount` , and return a `pageList` array which contains page numbers and `<BreakLabel />` , if needed.
 
 There are 4 possible cases of combination between page numbers and break labels:
 
 1. Showing all the pages:
 
-![demo_4](/post/build-your-own-pagination/demo_4.png)
+![case_1.png](/post/build-your-own-pagination/case_1.png)
 
 2. Showing break label on the right:
 
-![demo_5](/post/build-your-own-pagination/demo_5.png)
+![case_2.png](/post/build-your-own-pagination/case_2.png)
 
 3. Showing break label on the left:
 
-![demo_6](/post/build-your-own-pagination/demo_6.png)
+![case_3.png](/post/build-your-own-pagination/case_3.png)
 
 4. Showing break labels on both side:
 
-![demo_7](/post/build-your-own-pagination/demo_7.png)
+![case_4.png](/post/build-your-own-pagination/case_4.png)
 
 Let’s discuss conditions which trigger each cases:
 
 ### Case 1 “Showing all the pages”:
 
-To decide whether to show all pages or not, we need to calculate the value of `maxLengthOfPageNumbersToShow`. 
+First thing to know is that, we only want to show the break label if the page length between extreme sibling and extreme boundary is greater or equal to 2.
 
-If the `totalPageCount` is less or equal to this count, then there is no need to show any break label, whereas if the `totalPageCount` is larger, we will have to hide the rest page numbers, and place break label as placeholder on the UI, this is will be case 2, 3 and 4, which we will discuss later.
+For example, in the below diagram, the page length between left-sibling ( page 3 ) and left-boundary ( page 1 ) is only 1 ( page 2 ), thus we don’t show the break label.
 
-`maxLengthOfPageNumbersToShow` should be the sum of the length over the “left-boundary pages”, “left-sibling pages”, “current page”, “right-sibling pages”, “right-boundary pages” and an extra “1”. 
+![fig_3.png](/post/build-your-own-pagination/fig_3.png)
 
-The extra 1 stands for the extra page button count to be shown between extreme sibling ( either the most left or right sibling ) and extreme boundary ( either the most left or right boundary ), it’s like a buffer, if the pages length between the two extreme buttons are larger than 1, then those page buttons will be hidden. 
+Here’s another example, the page length between left-sibling ( page 4 ) and left-boundary ( page 1 ) is 2 ( page 2 and page 3 ), in this case we show Dots as placeholder for the two hidden pages.
 
-This extra page button will be place next to the extreme sibling button, while it’s next to the right or left extreme sibling depends on situations:
+![fig_4.png](/post/build-your-own-pagination/fig_4.png)
 
-( B: Boundary; S: Sibling; C: current; E: extra )
+As you may already guessed, to decide whether to show all pages or not, we need to calculate the value of `maxLengthOfPageNumbersToShow`. 
 
-Fig 1
+If the `totalPageCount` is less or equal to this count, then there is no need to show any break label, whereas if the `totalPageCount` is larger, we will have to hide the some pages, and place break label as placeholder on the UI, this is going to be case 2, 3 and 4, which we will discuss later.
 
-![demo_8](/post/build-your-own-pagination/demo_8.png)
+`maxLengthOfPageNumbersToShow` should be the sum of the length over the “left-boundary pages”, “breakLabelPlaceholderLength - 1”, “left-sibling pages”, “current page”, “right-sibling pages”, “breakLabelPlaceholderLength - 1” and “right-boundary pages”.
 
-when current page is 3, the left boundary will be page 1, the sibling will be page 2 and 4, while the extra buffer page will be page 5, the rest will be hidden except for the right boundary page 8.
-
-Fig 2
-
-![demo_9](/post/build-your-own-pagination/demo_9.png)
-
-when current page is 4, the left boundary will be page 1, the sibling will be page 3 and 5, while the extra buffer page goes to page 2 because the sum of page 6 and page 7 is 2, which is greater than the buffer count 1, so those 2 pages will be hidden.
-
-Fig 3
-
-![demo_10](/post/build-your-own-pagination/demo_10.png)
-
-now the current page goes to 5, the left boundary will be page 1, the sibling will be page 4 and 6, while the extra buffer page goes to page 7 because the sum of page 2 and page 3 is 2, which is greater than the buffer count 1, so those 2 pages will be hidden.
-
-Fig 4 & 5
-
-![demo_11](/post/build-your-own-pagination/demo_11.png)
-
-![demo_12](/post/build-your-own-pagination/demo_12.png)
-
-you might be thinking, what if the current page is at either page 1 or 2, how do we calculate the boundary and sibling when they are overlap? Well, in these cases, we still leave spaces for the boundary and siblings, so as you can see, when current page goes to 2 or 1, pages that are hidden still goes to page 6 and 7.
-
----
-
-The above diagrams should give a rather clear view on each possible situation.
-
-Now we can implement the code for case 1:
+Now we can write down the code for CASE 1:
 
 ```tsx
 // usePaginationList.ts
@@ -495,48 +475,53 @@ export const usePaginationList = (params: GenPaginationListParams) => {
     const firstPage = 1;
     const lastPage = totalPageCount;
 
-    // if totalPageCount is more than this count
-    // we will have to hide some pages and show break label instead
-		// 1 is for currentPage & extra buffer
-    const maxLengthOfPageNumbersToShow =
-      2 * boundaryCount + 2 * siblingCount + 1 + 1;
-
+		// if totalPageCount is more than this count
+		// we will have to hide some pages and show Dots instead
+		const currentPageLength = 1;
+		const breakLabelPlaceholderLength = 2;
+		const maxLengthOfPageNumbersToShow =
+	  2 * boundaryCount +
+	  2 * siblingCount +
+	  currentPageLength +
+	  (breakLabelPlaceholderLength - 1) + // left
+	  (breakLabelPlaceholderLength - 1); // right
+	
     // CASE 1: show all page numbers
     if (totalPageCount <= maxLengthOfPageNumbersToShow) {
       return genArrayOfNumbers(firstPage, lastPage);
     }
-  }, [boundaryCount, siblingCount, totalPageCount]);
 
-	// A, CASE 2 ~ 4
+		// A, CASE 2 ~ 4
+
+  }, [boundaryCount, siblingCount, totalPageCount]);
 
   return paginationList;
 };
 ```
 
-Count the `maxLengthOfPageNumbersToShow` first, if `totalPageCount` is less or equals to it, then we simply render all the page numbers.
+Calculate `maxLengthOfPageNumbersToShow` first, if `totalPageCount` is less or equals to it, then we simply render all the page numbers.
 
-Noted that we use `useMemo` to cache the return `paginationList` , since the calculation in total will be quit heave, and Pagination is likely to be re-used often, so it’s better to cache the return value with `useMemo` .
+Noted that we use `useMemo` to cache the return `paginationList` , since the calculation is quit heave, and Pagination is likely to be reused often, it’s better to cache the return value with `useMemo` .
 
 ### Case 2, 3, and 4:
 
-If the condition reaches `// A` , it means we need to start placing break label into the `pageList`. 
+If the condition reaches `// A, CASE 2 ~ 4` , it means we need to start placing break label into the `pageList`. 
 
-We are going to discuss case 2, 3, and 4 together, since they all show break label, the differences between each cases is “where” they place the break label.
+We are going to discuss CASE 2, 3, and 4 together, since they all show break label, the differences between each cases is “where” they place the break label.
 
-Before writing some detail logic, let’s see what our final code are going look like:
+Before writing some detail logic, let’s see what our final code is going to look like:
 
 ```tsx
 // usePaginationList.ts
 import BreakLabel from "./BreakLabel";
 
-// ... hide the rest
+// ...
 
 export const usePaginationList = (params: GenPaginationListParams) => {
   const { totalPageCount, currentPage, siblingCount, boundaryCount } = params;
 
   const paginationList = useMemo(() => {
-		
-    /* ... */
+		// ...
 
 		// CASE 1: show all page numbers
     if (totalPageCount <= maxLengthOfPageNumbersToShow) {
@@ -544,9 +529,9 @@ export const usePaginationList = (params: GenPaginationListParams) => {
     }
 
 		// A, CASE 2 ~ 4 starts from here
-    
-		const shouldShowLeftBreakLabel: boolean = ...;
-    const shouldShowRightBreakLabel: boolean = ...;
+
+		const shouldShowLeftBreakLabel: boolean = ...
+    const shouldShowRightBreakLabel: boolean = ...
 
     // CASE 2: show right break label
     if(!shouldShowLeftBreakLabel && shouldShowRightBreakLabel){
@@ -580,75 +565,83 @@ export const usePaginationList = (params: GenPaginationListParams) => {
 };
 ```
 
-The above code should explain quit clear on what we are going to implement.
+First, let’s see figure out how `shouldShowLeftDots` and `shouldShowRightDots` should look like. 
 
-Declare 2 booleans, `shouldShowLeftBreakLabel` and `shouldShowRightBreakLabel` , which will help us decide where to place our break label ( CASE 2 ~ 4 ).
+As mentioned above, we only show the Dots ( break label ) when the page length between the extreme sibling and the extreme boundary are more than 2 ( `breakLabelPlaceholderLength` ).
 
-In each cases, place break label into the returned `pageList` according to the condition. For example, in CASE 2, if the break label is designated to the right, then the returned array should look like this:
+![fig_5.png](/post/build-your-own-pagination/fig_5.png)
 
-```tsx
-return [...leftPages, <BreakLabel />, ...rightBoundaryPages];
-```
-
-And what is `leftPages` ? It will be “left-boundary pages” + “left-sibling pages” + “right-sibling pages” + “current page” + “extra buffer”.
-
-So, as you may deduce, `rightPages` will be “right-boundary pages” + “left-sibling pages” + “right-sibling pages” + “current page” + “extra buffer”, while `middlePages` will be “left-sibling pages” + “current page” + “right-sibling pages”, it excludes “extra buffer” because in this case we put break label on both side.
-
-Now, what about `shouldShowLeftBreakLabel` and `shouldShowRightBreakLabel` ? Well, the 2 booleans can be deduced simply by checking if the pages length between the extreme boundary page and the extreme sibling page is more than 1, then there should be a break label:
+So the code will be this:
 
 ```tsx
 
 const leftExtremeBoundary = boundaryCount;
-const rightExtremeBoundary = lastPage - boundaryCount + 1;
+const rightExtremeBoundary = lastPage - (boundaryCount - 1);
 
-// we are using Math.max and Math.min to 
-// make sure the extreme sibling won't exceed our boundary
-const leftExtremeSibling = Math.max(currentPage, currentPage - siblingCount);
-const rightExtremeSibling = Math.min(currentPage, currentPage + siblingCount);
+// using Math.max && Math.min to prevent result from exceeding lastPage
+// and firstPage
+const leftExtremeSibling = Math.max(firstPage, currentPage - siblingCount);
+const rightExtremeSibling = Math.min(lastPage, currentPage + siblingCount);
 
-const extraBufferLength = 1;
-
-const shouldShowLeftBreakLabel: boolean = leftExtremeBoundary + extraBufferLength < leftExtremeSibling
-const shouldShowRightBreakLabel: boolean = rightExtremeSibling + extraBufferLength < rightExtremeBoundary;
+const shouldShowLeftDots =
+  leftExtremeBoundary + breakLabelPlaceholderLength < leftExtremeSibling;
+const shouldShowRightDots =
+  rightExtremeSibling + breakLabelPlaceholderLength < rightExtremeBoundary;
 ```
 
-Knowing all the detail logic, let’s finish our code for CASE 2 ~ 4:
+Now that we know the `shouldShowLeftDots` and `shouldShowRightDots` , let’s dive into each cases:
+
+- CASE 2: show right Dots
 
 ```tsx
-const extraBufferLength = 1;
-const currentPageLength = 1;
-
-// CASE 2: show right break label
-if (!shouldShowLeftBreakLabel && shouldShowRightBreakLabel) {
+// CASE 2: show right Dots
+if (!shouldShowLeftDots && shouldShowRightDots) {
   const leftPagesLength =
     boundaryCount +
     siblingCount * 2 +
     currentPageLength +
-    extraBufferLength;
+    (breakLabelPlaceholderLength - 1);
   const leftPages = genArrayOfNumbers(firstPage, leftPagesLength);
   const rightBoundaryPages = genArrayOfNumbers(
     lastPage - boundaryCount + 1,
     lastPage
   );
 
-  return [...leftPages, BreakLabel(), ...rightBoundaryPages];
+  return [...leftPages, <BreakLabel />, ...rightBoundaryPages];
 }
+```
 
-// CASE 3: show left break label
-if (shouldShowLeftBreakLabel && !shouldShowRightBreakLabel) {
+Since the break label is designated to the right, we only show the boundary pages on the right.
+
+As for `leftPages` , calculate `leftPagesLength` first, it is going to be the sum of “left-boundary pages”, “ `breakLabelPlaceholderLength` - 1”, “left and right sibling pages” and current page.
+
+- CASE 3: show left Dots
+
+```tsx
+if (shouldShowLeftDots && !shouldShowRightDots) {
   const leftBoundaryPages = genArrayOfNumbers(firstPage, boundaryCount);
   const rightPagesStart =
-    lastPage - siblingCount * 2 - boundaryCount + 1 - extraBufferLength;
+    lastPage -
+    siblingCount * 2 -
+    (boundaryCount - 1) -
+    (breakLabelPlaceholderLength - 1) -
+    currentPageLength;
   const rightPages = genArrayOfNumbers(rightPagesStart, lastPage);
 
-  return [...leftBoundaryPages, BreakLabel(), ...rightPages];
+  return [...leftBoundaryPages, <BreakLabel />, ...rightPages];
 }
+```
 
-// CASE 4: show break labels on both side
-if (shouldShowLeftBreakLabel && shouldShowRightBreakLabel) {
+The logic behind CASE 3 is pretty much the same as CASE 2.
+
+- CASE 4: show Dots on both side
+
+```tsx
+// CASE 4: show Dots on both side
+if (shouldShowLeftDots && shouldShowRightDots) {
   const leftBoundaryPages = genArrayOfNumbers(firstPage, boundaryCount);
   const rightBoundaryPages = genArrayOfNumbers(
-    lastPage - boundaryCount + 1,
+    lastPage - (boundaryCount - 1),
     lastPage
   );
   const middlePages = genArrayOfNumbers(
@@ -657,25 +650,131 @@ if (shouldShowLeftBreakLabel && shouldShowRightBreakLabel) {
   );
   return [
     ...leftBoundaryPages,
-    BreakLabel(),
+    <BreakLabel />,
     ...middlePages,
-    BreakLabel(),
+    <BreakLabel />,
     ...rightBoundaryPages,
   ];
 }
+```
+
+CASE 4 is rather simpler to understand, since we are showing Dots on both side, the pages on boundary and sibling can easily be calculated.
+
+---
+
+The final code of `usePaginationList` is here:
+
+```tsx
+import { useMemo } from "react";
+import { genArrayOfNumbers } from "./genArrayOfNumbers";
+import BreakLabel from "./BreakLabel";
+
+type GenPaginationListParams = {
+  totalPageCount: number;
+  currentPage: number;
+  siblingCount: number;
+  boundaryCount: number;
+};
+
+export const usePaginationList = (params: GenPaginationListParams) => {
+  const { totalPageCount, currentPage, siblingCount, boundaryCount } = params;
+
+  const paginationList = useMemo(() => {
+    const firstPage = 1;
+    const lastPage = totalPageCount;
+
+    // if totalPageCount is more than this count
+    // we will have to hide some pages and show Dots instead
+    const currentPageLength = 1;
+    const breakLabelPlaceholderLength = 2;
+    const maxLengthOfPageNumbersToShow =
+      2 * boundaryCount +
+      2 * siblingCount +
+      currentPageLength +
+      (breakLabelPlaceholderLength - 1) + // left
+      (breakLabelPlaceholderLength - 1); // right
+
+    // CASE 1: show all page numbers
+    if (totalPageCount <= maxLengthOfPageNumbersToShow) {
+      return genArrayOfNumbers(firstPage, lastPage);
+    }
+
+    const leftExtremeBoundary = boundaryCount;
+    const rightExtremeBoundary = lastPage - (boundaryCount - 1);
+    const leftExtremeSibling = Math.max(firstPage, currentPage - siblingCount);
+    const rightExtremeSibling = Math.min(lastPage, currentPage + siblingCount);
+
+    const shouldShowLeftDots =
+      leftExtremeBoundary + breakLabelPlaceholderLength < leftExtremeSibling;
+    const shouldShowRightDots =
+      rightExtremeSibling + breakLabelPlaceholderLength < rightExtremeBoundary;
+
+    // CASE 2: show right Dots
+    if (!shouldShowLeftDots && shouldShowRightDots) {
+      const leftPagesLength =
+        boundaryCount +
+        siblingCount * 2 +
+        currentPageLength +
+        (breakLabelPlaceholderLength - 1);
+      const leftPages = genArrayOfNumbers(firstPage, leftPagesLength);
+      const rightBoundaryPages = genArrayOfNumbers(
+        lastPage - boundaryCount + 1,
+        lastPage
+      );
+
+      return [...leftPages, <BreakLabel />, ...rightBoundaryPages];
+    }
+
+    // CASE 3: show left Dots
+    if (shouldShowLeftDots && !shouldShowRightDots) {
+      const leftBoundaryPages = genArrayOfNumbers(firstPage, boundaryCount);
+      const rightPagesStart =
+        lastPage -
+        siblingCount * 2 -
+        (boundaryCount - 1) -
+        (breakLabelPlaceholderLength - 1) -
+        currentPageLength;
+      const rightPages = genArrayOfNumbers(rightPagesStart, lastPage);
+
+      return [...leftBoundaryPages, <BreakLabel />, ...rightPages];
+    }
+
+    // CASE 4: show Dots on both side
+    if (shouldShowLeftDots && shouldShowRightDots) {
+      const leftBoundaryPages = genArrayOfNumbers(firstPage, boundaryCount);
+      const rightBoundaryPages = genArrayOfNumbers(
+        lastPage - (boundaryCount - 1),
+        lastPage
+      );
+      const middlePages = genArrayOfNumbers(
+        currentPage - siblingCount,
+        currentPage + siblingCount
+      );
+      return [
+        ...leftBoundaryPages,
+        <BreakLabel />,
+        ...middlePages,
+        <BreakLabel />,
+        ...rightBoundaryPages,
+      ];
+    }
+  }, [boundaryCount, siblingCount, totalPageCount, currentPage]);
+
+  return paginationList;
+};
 ```
 
 ## Wrap up
 
 Voilà! Our pagination should now work well.
 
-If you are interested in the complete code base, here’s the [repo](https://github.com/alexyin0978/build-your-own-pagination).
+![my_demo_final.gif](/post/build-your-own-pagination/my_demo_final.gif)
 
-And here’s the [demo link](https://build-your-own-pagination.vercel.app/), feel free to try.
+If you are interested in the complete code base, here’s the [repo](https://github.com/alexyin0978/build-your-own-pagination), I’ve added some styles to it to make the component looks more like the MUI demo.
+
+Here’s the [demo link](https://build-your-own-pagination.vercel.app/), feel free to try.
 
 Thanks for reading 🎉
-
-![demo_13](/post/build-your-own-pagination/demo_13.gif)
 
 ## References
 
