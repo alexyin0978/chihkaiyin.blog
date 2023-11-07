@@ -524,7 +524,7 @@ You can check the [repo branch “setup”](https://github.com/alexyin0978/vites
 
 ## Custom render function
 
-Before diving into CASE - UI section, let’s test if we can successfully render the component in the test file first. Let’s use `App.tsx` as our first example. 
+Before diving into CASE - basic UI testing with <App /> section, let’s test if we can successfully render the component in the test file first. Let’s use `App.tsx` as our first example. 
 
 ### Our first test suite
 
@@ -768,11 +768,9 @@ afterEach(() => {
 
 So we don’t have to do the cleanup each time!
 
-That’s it for our very basic UI test.
-
 ![fig_8.png](/post/beginners-vitest-with-react/fig_8.png)
 
-That’s it for the basic UI testing. Feel free to checkout the [branch `case/UI` repo here](https://github.com/alexyin0978/vitest-starter/tree/case/UI).
+That’s it for the basic UI test. Feel free to checkout the [branch `case/UI` repo here](https://github.com/alexyin0978/vitest-starter/tree/case/UI).
 
 Now we can dive into testing our global component: `SearchBar.tsx` .
 
@@ -914,7 +912,7 @@ expect(input).toHaveValue(mockValue.newValue);
 
 ![fig_10.png](/post/beginners-vitest-with-react/fig_10.png)
 
-I don’t quit understand the proper reason why the above assertion won’t work. If you check the document of React Testing Library, it actually recommends another library called `[user-event](https://testing-library.com/docs/user-event/intro)` , which mocks the user event more smoothly. But in this article, we will just stick with `fireEvent`.
+I don’t quit understand the proper reason why the above assertion won’t work. If you check the document of React Testing Library, it actually recommends another library called [user-event](https://testing-library.com/docs/user-event/intro) , which mocks the user event more smoothly. But in this article, we will just stick with `fireEvent`.
 
 Finally, let’s test the `onClear` event:
 
@@ -951,7 +949,7 @@ Also, in case you would like to check the references yourself, the following ste
 
 ### Mock handlers
 
-Then, touch a new file called `handlers.ts` inside `test/` , and write down the mocking handlers and responses:
+Let's mock the handlers first, touch a new file called `handlers.ts` inside `test/` , and write down the mocking handlers and responses:
 
 ```tsx
 // src/test/handlers
@@ -1088,7 +1086,7 @@ test("successful query hook", async () => {
 });
 ```
 
-Noted that, the test will be an async function, since we are going to await the `waitFor` function, which will run the assertion when the query resolved. After query resolved, we can test if the data is defined by checking the length, data content …etc.
+Noted that the test will be an async function, since we are going to await the `waitFor` function, which will run the assertion when the query resolved. After query resolved, we can test if the data is defined by checking the length, data content …etc.
 
 ### Testing on query hooks - Failure
 
@@ -1291,7 +1289,7 @@ test("render post list after query success", async () => {
 
 You can also use the `waitFor` method, in this case we do not have to use `findByTestId`, we can simply grab the node by using the `getByTestId` method:
 
-```
+```tsx
 import { waitFor } from "@testing-library/dom";
 
 test("render post list after query success", async () => {
@@ -1341,7 +1339,7 @@ In this article, we’ve only covered some common and basic cases of unit test w
 
 Feel free to clone the complete code from the [main branch of this repo.](https://github.com/alexyin0978/vitest-starter)
 
-That’s it, hope you can enjoy the article, thanks for reading 🛶
+That’s it, hope you enjoy this article, thanks for reading 🛶
 
 ### Reference
 
