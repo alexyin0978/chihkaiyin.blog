@@ -80,7 +80,6 @@ export default function Home() {
 
   return (
     <>
-      <Nav />
       <SelfIntro />
       <main>
         {postMetaDatas.length !== 0 &&

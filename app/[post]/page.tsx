@@ -11,7 +11,6 @@ import {
 } from "@/utils/readPost";
 
 import Markdown from "@/components/Markdown";
-import Nav from "@/components/Nav";
 
 type PostProps = {
   params: {
@@ -98,10 +97,6 @@ export default function Post({ params }: PostProps) {
 
   return (
     <>
-      <Nav
-        titleSize="text-2xl"
-        titleColor="text-[#ffa7c4] dark:text-amber-100"
-      />
       <header className="mb-7 mt-14">
         <h1
           className={`${montserrat.className} text-4xl sm:text-[40px] sm:leading-10 mb-3 text-header dark:text-header_dark font-extrabold`}
