@@ -66,7 +66,7 @@ As you can see from the above test suite, a unit test consists of 3 parts:
     - `test('single test name', () => {})`
     - can contain multiple assertions and matchers, if any of the assertion failed, the whole test failed.
 - Assertion & Matchers
-    - `expect(SOMETHING).ToBe(SOMETHING)`
+    - `expect(A).ToBe(B)`
     - place inside a test
     - if any of the assertion failed, the test failed
     - Assertion refers to `expect`
@@ -95,7 +95,7 @@ Now that we know the basic concept of unit test, let’s dive into our react app
 Feel free to checkout and clone the branch `starter` [from the repo here](https://github.com/alexyin0978/vitest-starter/tree/starter). We will be using the starter app as template, and implement Vitest into it later.
 
 <!-- TODO: embed .mov type -->
-<!-- ![movie_1.mov](/post/beginners-vitest-with-react/movie_1.mov) -->
+![movie_1.mov](/post/beginners-vitest-with-react/movie_1.mov)
 
 The app is built by React + Vite + TypeScript, along with two common used libraries: React Router DOM and React Query. 
 
