@@ -16,6 +16,7 @@ export const metadata = {
   metadataBase: new URL("https://chihkaiyin.blog"),
   creator: "ChihKai Yin",
   description: "A blog built by ChihKai Yin.",
+  keywords: ["chihkai yin", "programming", "web development", "nextjs", "typscript", "express", "javascript"],
   openGraph: {
     title: "ChihKai Yin",
     description: "I write things I have learned.",
