@@ -15,19 +15,21 @@ export function SelfIntro() {
     <aside className="flex items-center pb-7 mb-12 mt-10">
       {/* avatar */}
       <div className="w-16 h-16 rounded-full mr-4 border border-gray-400 overflow-hidden pb-5">
-        <Image
-          src={Avatar}
-          width={72}
-          alt="avatar"
-          className="-mt-[24px] mr-[1px]"
-        />
+        <Link href="/about">
+          <Image
+            src={Avatar}
+            width={72}
+            alt="avatar"
+            className="-mt-[24px] mr-[1px]"
+          />
+        </Link>
       </div>
       {/* intro */}
       <div className={`text-black dark:text-white ${merriweather.className}`}>
         <p>
           Personal blog by{" "}
           <Link
-            href="https://www.linkedin.com/in/alexyin0978/"
+            href="/about"
             className="text-header dark:text-header_dark underline underline-offset-2"
           >
             ChihKai Yin
