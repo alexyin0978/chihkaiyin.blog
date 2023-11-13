@@ -37,26 +37,26 @@ function ThemeSwitch() {
 
   const processPositionX = () => {
     if (!hasMounted) return sun.positionX.dark;
-    if (theme === THEME_VALUE.DARK) {
-      return sun.positionX.dark;
+    if (theme === THEME_VALUE.LIGHT) {
+      return sun.positionX.light;
     }
-    return sun.positionX.light;
+    return sun.positionX.dark;
   };
 
   const processShadowPositionX = () => {
     if (!hasMounted) return shadow.positionX.dark;
-    if (theme === THEME_VALUE.DARK) {
-      return shadow.positionX.dark;
+    if (theme === THEME_VALUE.LIGHT) {
+      return shadow.positionX.light;
     }
-    return shadow.positionX.light;
+    return shadow.positionX.dark;
   };
 
   const processShadowOpacity = () => {
     if (!hasMounted) return shadow.opacity.dark;
-    if (theme === THEME_VALUE.DARK) {
-      return shadow.opacity.dark;
+    if (theme === THEME_VALUE.LIGHT) {
+      return shadow.opacity.light;
     }
-    return shadow.opacity.light;
+    return shadow.opacity.dark;
   };
 
   const handleSwitchTheme = () => {
