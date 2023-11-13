@@ -36,7 +36,6 @@ function ThemeSwitch() {
   const { sun, shadow } = switchStyles;
 
   const processPositionX = () => {
-    if (!hasMounted) return sun.positionX.dark;
     if (theme === THEME_VALUE.LIGHT) {
       return sun.positionX.light;
     }
@@ -44,7 +43,6 @@ function ThemeSwitch() {
   };
 
   const processShadowPositionX = () => {
-    if (!hasMounted) return shadow.positionX.dark;
     if (theme === THEME_VALUE.LIGHT) {
       return shadow.positionX.light;
     }
@@ -52,7 +50,6 @@ function ThemeSwitch() {
   };
 
   const processShadowOpacity = () => {
-    if (!hasMounted) return shadow.opacity.dark;
     if (theme === THEME_VALUE.LIGHT) {
       return shadow.opacity.light;
     }
@@ -76,12 +73,16 @@ function ThemeSwitch() {
       className="bg-gray-800 w-14 h-7 rounded-full relative cursor-pointer"
       onClick={handleSwitchTheme}
     >
-      <div
-        className={`bg-yellow-300 transition-transform rounded-full w-5 h-5 absolute top-[4px] ${processPositionX()}`}
-      />
-      <div
-        className={`bg-gray-800 rounded-full w-4 h-4 absolute top-1 transition-all ${processShadowPositionX()} ${processShadowOpacity()}`}
-      />
+      {hasMounted && (
+        <>
+          <div
+            className={`bg-yellow-300 transition-transform rounded-full w-5 h-5 absolute top-[4px] ${processPositionX()}`}
+          />
+          <div
+            className={`bg-gray-800 rounded-full w-4 h-4 absolute top-1 transition-all ${processShadowPositionX()} ${processShadowOpacity()}`}
+          />
+        </>
+      )}
     </button>
   );
 }
