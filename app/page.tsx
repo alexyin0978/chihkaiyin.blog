@@ -6,7 +6,6 @@ import { Montserrat } from "@next/font/google";
 import { getAllPostsMetaDatas, PostMetaData } from "@/utils/readPost";
 
 import { SelfIntro } from "@/components/SelfIntro";
-import Nav from "@/components/Nav";
 
 export const metadata = {
   title: {
