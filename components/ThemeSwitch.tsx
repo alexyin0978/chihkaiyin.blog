@@ -40,7 +40,7 @@ function ThemeSwitch() {
     if (theme === THEME_VALUE.LIGHT) {
       return sun.positionX.light;
     }
-    return sun.positionX.dark;
+    return sun.positionX.dark; // dark or system
   };
 
   const processShadowPositionX = () => {
@@ -48,7 +48,7 @@ function ThemeSwitch() {
     if (theme === THEME_VALUE.LIGHT) {
       return shadow.positionX.light;
     }
-    return shadow.positionX.dark;
+    return shadow.positionX.dark; // dark or system
   };
 
   const processShadowOpacity = () => {
@@ -56,7 +56,7 @@ function ThemeSwitch() {
     if (theme === THEME_VALUE.LIGHT) {
       return shadow.opacity.light;
     }
-    return shadow.opacity.dark;
+    return shadow.opacity.dark; // dark or system
   };
 
   const handleSwitchTheme = () => {
