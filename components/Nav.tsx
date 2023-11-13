@@ -11,22 +11,15 @@ const montserrat = Montserrat({
 
 const pageTitle = "CHIHKAI_YIN";
 
-export default function Nav({
-  titleSize = "text-2xl sm:text-3xl",
-  titleColor = "text-pageTitle dark:text-pageTitle_dark",
-}: {
-  titleSize?: string;
-  titleColor?: string;
-}) {
+export default function Nav() {
   return (
     <nav className="flex justify-between items-center h-10">
       <Link
         href="/"
-        className={`${titleSize} font-extrabold ${titleColor} ${montserrat.className}`}
+        className={`text-2xl sm:text-3xl font-extrabold text-pageTitle dark:text-pageTitle_dark ${montserrat.className}`}
       >
         {pageTitle}
       </Link>
-
       <ThemeSwitch />
     </nav>
   );

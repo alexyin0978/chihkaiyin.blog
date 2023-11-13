@@ -3,6 +3,7 @@ import "./globals.css";
 import React from "react";
 import Footer from "@/components/Footer";
 import { Providers as ThemeProvider } from "@/components/ThemeProvider";
+import Nav from "@/components/Nav";
 
 export default function RootLayout({
   children,
@@ -20,6 +21,7 @@ export default function RootLayout({
             id="app"
             className="bg-main dark:bg-main_dark relative max-w-pageMax mx-auto w-full pt-11 px-5 h-full min-h-screen"
           >
+            <Nav />
             {children}
             <Footer />
           </div>
