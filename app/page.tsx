@@ -16,7 +16,20 @@ export const metadata = {
   metadataBase: new URL("https://chihkaiyin.blog"),
   creator: "ChihKai Yin",
   description: "A blog built by ChihKai Yin.",
-  keywords: ["chihkai yin", "programming", "web development", "nextjs", "typscript", "express", "javascript"],
+  keywords: [
+    "chihkai yin",
+    "programming",
+    "web development",
+    "frontend development",
+    "react",
+    "nextjs",
+    "typescript",
+    "express",
+    "javascript",
+    "vitest",
+    "vite",
+    "unit test",
+  ],
   openGraph: {
     title: "ChihKai Yin",
     description: "I write things I have learned.",
@@ -64,8 +77,6 @@ function PostListItem(props: PostMetaData) {
 
 export default function Home() {
   const postMetaDatas = getAllPostsMetaDatas();
-
-  // console.log("postMetaDatas: ", postMetaDatas);
 
   return (
     <>
