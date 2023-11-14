@@ -1,3 +1,4 @@
+import path from "path";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
@@ -8,6 +9,12 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       enabled: true, // show coverage when run vitest:ui
+    },
+    restoreMocks: true,
+  },
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "/"),
     },
   },
 });

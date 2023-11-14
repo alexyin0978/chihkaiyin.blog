@@ -10,7 +10,7 @@ const THEME_VALUE = {
   LIGHT: "light",
 };
 
-const switchStyles = {
+export const switchStyles = {
   sun: {
     positionX: {
       dark: "translate-x-8",
@@ -29,7 +29,7 @@ const switchStyles = {
   },
 };
 
-function ThemeSwitch() {
+function ThemeSwitch({ mockClick }: { mockClick?: () => void }) {
   const hasMounted = useHasMounted();
   const { theme, setTheme } = useTheme();
 
@@ -65,6 +65,10 @@ function ThemeSwitch() {
     }
 
     setTheme(nextTheme);
+
+    if (mockClick) {
+      mockClick();
+    }
   };
 
   return (
@@ -72,13 +76,16 @@ function ThemeSwitch() {
       type="button"
       className="bg-gray-800 w-14 h-7 rounded-full relative cursor-pointer"
       onClick={handleSwitchTheme}
+      data-testid="theme-switch"
     >
       {hasMounted && (
         <>
           <div
+            data-testid="theme-switch__sun"
             className={`bg-yellow-300 transition-transform rounded-full w-5 h-5 absolute top-[4px] ${processPositionX()}`}
           />
           <div
+            data-testid="theme-switch__shadow"
             className={`bg-gray-800 rounded-full w-4 h-4 absolute top-1 transition-all ${processShadowPositionX()} ${processShadowOpacity()}`}
           />
         </>
