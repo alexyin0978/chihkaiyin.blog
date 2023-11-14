@@ -6,6 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "vitest": "vitest",
+    "vitest:ui": "vitest --ui",
+    "vitest:coverage": "vitest run --coverage",
     "lint": "next lint",
     "prettier:list-diff": "prettier --list-different --ignore-path .gitignore .",
     "prettier:fix": "prettier --write --ignore-path .gitignore .",
@@ -39,13 +42,19 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.1.0",
     "@types/react-syntax-highlighter": "^15.5.7",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
+    "@vitest/coverage-v8": "^0.34.6",
+    "@vitest/ui": "^0.34.6",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.1.0",
+    "jsdom": "^22.1.0",
     "pre-commit": "^1.2.2",
     "prettier": "^3.0.0",
-    "prettier-plugin-tailwindcss": "^0.3.0"
+    "prettier-plugin-tailwindcss": "^0.3.0",
+    "vitest": "^0.34.6"
   }
 }
