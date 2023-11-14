@@ -10,13 +10,11 @@
     "vitest:ui": "vitest --ui",
     "vitest:coverage": "vitest run --coverage",
     "lint": "next lint",
+    "NOTE:prettier": "run `npm run prettier` inside `pre-commit` if wanna format code on every commit",
     "prettier:list-diff": "prettier --list-different --ignore-path .gitignore .",
     "prettier:fix": "prettier --write --ignore-path .gitignore .",
     "prettier": "prettier --list-different --ignore-path .gitignore . | xargs -I {} prettier --write {}"
   },
-  "pre-commit": [
-    "prettier"
-  ],
   "dependencies": {
     "@next/font": "^13.4.9",
     "@types/node": "20.2.6",
