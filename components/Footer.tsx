@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const mediaLinks = [
+export const mediaLinks = [
   {
     type: "LinkedIn",
     link: "https://www.linkedin.com/in/alexyin0978/",
@@ -14,11 +14,14 @@ const mediaLinks = [
 
 export default function Footer() {
   return (
-    <footer>
+    <footer data-testid="footer">
       <div className="h-44">{/* invisible height */}</div>
       <div className="absolute bottom-0 h-14 px-5 left-0 text-sm text-pageTitle dark:text-pageTitle_dark font-light pt-5 pb-3 w-full flex justify-between items-center">
         <p>© 2023 ChihKai Yin</p>
-        <div className="flex gap-3.5">
+        <div
+          className="flex gap-3.5"
+          data-testid="footer__links"
+        >
           {mediaLinks.map(({ type, link }) => (
             <Link
               key={type}
