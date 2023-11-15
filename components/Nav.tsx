@@ -13,8 +13,12 @@ const pageTitle = "CHIHKAI_YIN";
 
 export default function Nav() {
   return (
-    <nav className="flex justify-between items-center h-10">
+    <nav
+      className="flex justify-between items-center h-10"
+      data-testid="nav"
+    >
       <Link
+        data-testid="nav__link"
         href="/"
         className={`text-2xl sm:text-3xl font-extrabold text-pageTitle dark:text-pageTitle_dark ${montserrat.className}`}
       >
