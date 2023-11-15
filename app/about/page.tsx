@@ -5,6 +5,13 @@ import { Merriweather } from "next/font/google";
 
 import Avatar from "@/assets/avatar.jpeg";
 
+export async function generateMetadata() {
+  return {
+    title: "YIN - About",
+    description: "A blog built by ChihKai Yin.",
+  };
+}
+
 const merriweather = Merriweather({
   weight: "400",
   subsets: ["latin"],

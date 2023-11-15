@@ -9,7 +9,7 @@ import { SelfIntro } from "@/components/SelfIntro";
 
 export const metadata = {
   title: {
-    default: "CHIHKAI_YIN",
+    default: "YIN",
     template: "%s",
   },
   metadataBase: new URL("https://chihkaiyin.blog"),
