@@ -4,9 +4,9 @@ import { render, screen } from "@testing-library/react";
 import { SelfIntro } from "./SelfIntro";
 
 describe("SelfIntro: UI", () => {
-  // mock the font function first
+  // mock next/font function first
   vi.mock("next/font/google", () => ({
-    Merriweather: () => ({ className: "inter" }),
+    Merriweather: () => ({ className: "merriweather" }),
   }));
 
   beforeEach(() => {
@@ -23,10 +23,7 @@ describe("SelfIntro: UI", () => {
     expect(avatarLink).toBeInTheDocument();
     expect(avatarLink).toBeEnabled();
 
-    expect(screen.getByTestId("self-intro__avatar-link")).toHaveAttribute(
-      "href",
-      "/about",
-    );
+    expect(avatarLink).toHaveAttribute("href", "/about");
   });
 
   test("title link should have attribute /about", () => {
@@ -34,9 +31,6 @@ describe("SelfIntro: UI", () => {
     expect(titleLink).toBeInTheDocument();
     expect(titleLink).toBeEnabled();
 
-    expect(screen.getByTestId("self-intro__title-link")).toHaveAttribute(
-      "href",
-      "/about",
-    );
+    expect(titleLink).toHaveAttribute("href", "/about");
   });
 });
