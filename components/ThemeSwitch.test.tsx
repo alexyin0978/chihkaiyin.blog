@@ -1,5 +1,6 @@
 import React from "react";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
 import ThemeSwitch, { switchStyles } from "./ThemeSwitch";
 
@@ -20,7 +21,7 @@ describe("ThemeSwitch: UI", () => {
     expect(btn).toBeEnabled();
   });
 
-  test("default to sun and change to moon when click once", () => {
+  test("default to sun and change to moon when click once", async () => {
     const sun = screen.getByTestId("theme-switch__sun");
     const shadow = screen.getByTestId("theme-switch__shadow");
     expect(sun).toBeInTheDocument();
@@ -33,11 +34,15 @@ describe("ThemeSwitch: UI", () => {
 
     // click
     const btn = screen.getByTestId("theme-switch");
-    fireEvent.click(btn);
+    expect(btn).toBeEnabled();
+    await userEvent.click(btn);
     expect(mockClick).toBeCalledTimes(1);
 
-    // after click, shows the sun
-    // expect(sun).toHaveClass(switchStyles.sun.positionX.light);
+    // TODO: after click, shows the sun
+
+    // expect(
+    //   screen.getByRole(switchStyles.sun.positionX.light),
+    // ).toBeInTheDocument();
     // expect(shadow).toHaveClass(switchStyles.shadow.opacity.light);
     // expect(shadow).toHaveClass(switchStyles.shadow.positionX.light);
   });

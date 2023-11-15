@@ -4,7 +4,7 @@ import React from "react";
 import { useTheme } from "next-themes";
 import { useHasMounted } from "@/hooks/useHasMounted";
 
-const THEME_VALUE = {
+export const THEME_VALUE = {
   // SYSTEM: "system",
   DARK: "dark",
   LIGHT: "light",
@@ -78,6 +78,7 @@ function ThemeSwitch({ mockClick }: { mockClick?: () => void }) {
       onClick={handleSwitchTheme}
       data-testid="theme-switch"
     >
+      {theme}
       {hasMounted && (
         <>
           <div
