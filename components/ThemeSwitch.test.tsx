@@ -38,8 +38,8 @@ describe("ThemeSwitch: UI", () => {
     await userEvent.click(btn);
     expect(mockClick).toBeCalledTimes(1);
 
-    // TODO: after click, shows the sun
-
+    // TODO: after click, shows the sun,
+    // seems missing "theme" and causing positionX not to update
     // expect(
     //   screen.getByRole(switchStyles.sun.positionX.light),
     // ).toBeInTheDocument();
