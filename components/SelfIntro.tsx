@@ -12,13 +12,20 @@ const merriweather = Merriweather({
 
 export function SelfIntro() {
   return (
-    <aside className="flex items-center pb-7 mb-12 mt-10">
+    <aside
+      className="flex items-center pb-7 mb-12 mt-10"
+      data-testid="self-intro"
+    >
       {/* avatar */}
       <div className="w-16 h-16 rounded-full mr-4 border border-gray-400 overflow-hidden pb-5">
-        <Link href="/about">
+        <Link
+          href="/about"
+          data-testid="self-intro__avatar-link"
+        >
           <Image
             src={Avatar}
-            width={72}
+            width={62}
+            height={110}
             alt="avatar"
             className="-mt-[24px] mr-[1px]"
           />
@@ -29,6 +36,7 @@ export function SelfIntro() {
         <p>
           Personal blog by{" "}
           <Link
+            data-testid="self-intro__title-link"
             href="/about"
             className="text-header dark:text-header_dark underline underline-offset-2"
           >
