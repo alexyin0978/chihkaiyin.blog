@@ -12,8 +12,6 @@ describe("page Home: UI", () => {
     Montserrat: () => ({ className: "montserrat" }),
   }));
 
-  beforeEach(() => {});
-
   test("should render same length as getAllPostsMetaDatas return", () => {
     render(<Home />);
     const main = screen.getByTestId("home__main");
@@ -22,7 +20,7 @@ describe("page Home: UI", () => {
     expect(main.children.length).toBe(getAllPostsMetaDatas().length);
   });
 
-  test("should render article properly", () => {
+  test("should render PostListItem properly", () => {
     const mockPost: PostMetaData = {
       title: "title",
       date: "date",
