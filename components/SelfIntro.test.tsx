@@ -9,10 +9,6 @@ describe("SelfIntro: UI", () => {
     Merriweather: () => ({ className: "inter" }),
   }));
 
-  vi.mock("next/dist/client/router", () => ({
-    useRouter: vi.fn(),
-  }));
-
   beforeEach(() => {
     render(<SelfIntro />);
   });
