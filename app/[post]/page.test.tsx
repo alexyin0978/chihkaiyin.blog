@@ -37,4 +37,15 @@ describe("page Post: UI", () => {
     const header = screen.getByTestId("post__header");
     expect(header).toBeInTheDocument();
   });
+
+  test("should call getPost and return mockPost", () => {
+    expect(getPostSpy).toHaveBeenCalledOnce();
+  });
+
+  test("should render the mock title and date", () => {
+    const title = screen.getByTestId("post__header__title");
+    const date = screen.getByTestId("post__header__date");
+    expect(title).toBeInTheDocument();
+    expect(date).toBeInTheDocument();
+  });
 });

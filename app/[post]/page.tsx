@@ -115,10 +115,7 @@ export default function Post({ params }: PostProps) {
           {date}
         </p>
       </header>
-      <main
-        className="pt-4"
-        data-testid="post__main"
-      >
+      <main className="pt-4">
         <article
           className={`prose text-black dark:text-gray-300 ${proseStyles.headings}
       ${proseStyles.p} ${proseStyles.a} ${proseStyles.blockquote}
