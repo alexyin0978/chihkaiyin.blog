@@ -1,4 +1,4 @@
-import fs from "fs";
+import { existsSync, readFileSync, readdirSync } from "fs";
 import matter from "gray-matter";
 import dayjs from "dayjs";
 
@@ -15,12 +15,17 @@ const POSTS_DIR = "post";
 const rootPath = () => process.cwd();
 
 const parseMarkdown = (path: string) => {
-  const markdown = fs.readFileSync(path, "utf-8");
+  // if (!existsSync(path)) {
+  //   // parse empty string if file/path not exist
+  //   return matter("");
+  // }
+
+  const markdown = readFileSync(path, "utf-8");
   return matter(markdown);
 };
 
 export const getAllPostsMetaDatas = () => {
-  const fileNames = fs.readdirSync(`${rootPath()}/${POSTS_DIR}`);
+  const fileNames = readdirSync(`${rootPath()}/${POSTS_DIR}`);
 
   const metadatas = fileNames
     .map((fileName) => {
@@ -44,9 +49,15 @@ export const getAllPostsMetaDatas = () => {
   return metadatas;
 };
 
-export const getPost = (post: string) =>
+export const getPost = (post: string) => {
   // eslint-disable-next-line implicit-arrow-linebreak
-  parseMarkdown(`${rootPath()}/${POSTS_DIR}/${post}.md`);
+  const markdown = parseMarkdown(`${rootPath()}/${POSTS_DIR}/${post}.md`);
+
+  return {
+    data: markdown.data,
+    content: markdown.content,
+  };
+};
 
 export const getAdjacentPostsMetaDatas = (
   currentPostTitle: string,

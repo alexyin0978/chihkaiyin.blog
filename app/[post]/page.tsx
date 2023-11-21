@@ -12,7 +12,7 @@ import {
 
 import Markdown from "@/components/Markdown";
 
-type PostProps = {
+export type PostProps = {
   params: {
     post: string;
   };
@@ -92,19 +92,25 @@ const postLinkSharedStyle =
 
 export default function Post({ params }: PostProps) {
   const { data: postMetaData, content: postMarkdown } = getPost(params.post);
+
   const { title, date } = postMetaData as PostMetaData;
   const [prevPostMetadata, nextPostMetadata] = getAdjacentPostsMetaDatas(title);
 
   return (
     <>
-      <header className="mb-7 mt-14">
+      <header
+        className="mb-7 mt-14"
+        data-testid="post__header"
+      >
         <h1
           className={`${montserrat.className} text-4xl sm:text-[40px] sm:leading-10 mb-3 text-header dark:text-header_dark font-extrabold`}
+          data-testid="post__header__title"
         >
           {title}
         </h1>
         <p
           className={`text-black dark:text-gray-300 text-sm ${merriweather.className}`}
+          data-testid="post__header__date"
         >
           {date}
         </p>
