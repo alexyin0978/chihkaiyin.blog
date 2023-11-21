@@ -15,10 +15,10 @@ const POSTS_DIR = "post";
 const rootPath = () => process.cwd();
 
 const parseMarkdown = (path: string) => {
-  if (!existsSync(path)) {
-    // parse empty string if file/path not exist
-    return matter("");
-  }
+  // if (!existsSync(path)) {
+  //   // parse empty string if file/path not exist
+  //   return matter("");
+  // }
 
   const markdown = readFileSync(path, "utf-8");
   return matter(markdown);

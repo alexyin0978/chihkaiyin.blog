@@ -4,11 +4,31 @@ import { render, screen } from "@testing-library/react";
 import * as readPostUtils from "@/utils/readPost";
 import Post, { PostProps } from "./page";
 
-describe("page Post: UI", () => {
-  vi.mock("next/font/google", () => ({
-    Merriweather: () => ({ className: "merriweather" }),
-    Montserrat: () => ({ className: "montserrat" }),
-  }));
+vi.mock("next/font/google", () => ({
+  Merriweather: () => ({ className: "merriweather" }),
+  Montserrat: () => ({ className: "montserrat" }),
+}));
+
+describe("page Post: UI with invalid post title", () => {
+  const INVALID_POST_TITLE = "post";
+  const invalidPostProps: PostProps = {
+    params: {
+      post: INVALID_POST_TITLE,
+    },
+  };
+
+  test("should throw error when title not valid", () => {
+    expect(() => render(<Post {...invalidPostProps} />)).toThrowError();
+  });
+});
+
+describe("page Post: UI with valid post title", () => {
+  const VALID_POST_TITLE = "beginners-vitest-with-react";
+  const validPostProps: PostProps = {
+    params: {
+      post: VALID_POST_TITLE,
+    },
+  };
 
   const mockPost = {
     data: {
@@ -17,29 +37,20 @@ describe("page Post: UI", () => {
     },
     content: "content",
   };
-  const getPostSpy = vi
-    .spyOn(readPostUtils, "getPost")
-    .mockImplementation(() => mockPost);
-
-  const mockPostProps: PostProps = {
-    params: {
-      post: "post",
-    },
-  };
 
   beforeEach(() => {
+    const getPostSpy = vi.spyOn(readPostUtils, "getPost");
     getPostSpy.mockReturnValue(mockPost);
-
-    render(<Post {...mockPostProps} />);
+    render(<Post {...validPostProps} />);
   });
 
-  test("should render header", () => {
+  test("should render header properly", () => {
     const header = screen.getByTestId("post__header");
     expect(header).toBeInTheDocument();
   });
 
-  test("should call getPost and return mockPost", () => {
-    expect(getPostSpy).toHaveBeenCalledOnce();
+  test("should call getPost once", () => {
+    expect(readPostUtils.getPost).toHaveBeenCalledOnce();
   });
 
   test("should render the mock title and date", () => {
@@ -47,5 +58,8 @@ describe("page Post: UI", () => {
     const date = screen.getByTestId("post__header__date");
     expect(title).toBeInTheDocument();
     expect(date).toBeInTheDocument();
+
+    expect(title.innerHTML).toBe(mockPost.data.title);
+    expect(date.innerHTML).toBe(mockPost.data.date);
   });
 });
