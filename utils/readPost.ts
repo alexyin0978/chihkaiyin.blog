@@ -1,4 +1,4 @@
-import { existsSync, readFileSync, readdirSync } from "fs";
+import { readFileSync, readdirSync } from "fs";
 import matter from "gray-matter";
 import dayjs from "dayjs";
 
@@ -15,11 +15,6 @@ const POSTS_DIR = "post";
 const rootPath = () => process.cwd();
 
 const parseMarkdown = (path: string) => {
-  // if (!existsSync(path)) {
-  //   // parse empty string if file/path not exist
-  //   return matter("");
-  // }
-
   const markdown = readFileSync(path, "utf-8");
   return matter(markdown);
 };
