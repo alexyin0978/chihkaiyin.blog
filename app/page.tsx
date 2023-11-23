@@ -47,6 +47,8 @@ export const metadata = {
 export default function Home() {
   const postMetaDatas = getAllPostsMetaDatas();
 
+  console.log("hi");
+
   return (
     <>
       <SelfIntro />
