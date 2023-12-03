@@ -17,6 +17,7 @@ import javascript from "react-syntax-highlighter/dist/cjs/languages/prism/javasc
 import bash from "react-syntax-highlighter/dist/cjs/languages/prism/bash";
 import markdown from "react-syntax-highlighter/dist/cjs/languages/prism/markdown";
 import json from "react-syntax-highlighter/dist/cjs/languages/prism/json";
+import sql from "react-syntax-highlighter/dist/cjs/languages/prism/sql";
 import { CodeComponent } from "react-markdown/lib/ast-to-react";
 
 SyntaxHighlighter.registerLanguage("css", css);
@@ -27,6 +28,7 @@ SyntaxHighlighter.registerLanguage("javascript", javascript);
 SyntaxHighlighter.registerLanguage("bash", bash);
 SyntaxHighlighter.registerLanguage("markdown", markdown);
 SyntaxHighlighter.registerLanguage("json", json);
+SyntaxHighlighter.registerLanguage("sql", sql);
 
 export default function Markdown({ content }: { content: string }) {
   const hasMounted = useHasMounted();
