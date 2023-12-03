@@ -6,7 +6,7 @@ tag: "mysql,database"
 index: 2
 ---
 
-Full Database Course for Beginners](https://www.youtube.com/watch?v=HXV3zeQKqGY)** course **.**
+The articles are notes I took on the [SQL Tutorial - Full Database Course for Beginners](https://www.youtube.com/watch?v=HXV3zeQKqGY) course.
 
 They break into four parts:
 
