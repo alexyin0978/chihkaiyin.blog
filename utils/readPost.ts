@@ -7,6 +7,7 @@ export interface PostMetaData {
   title: string;
   subtitle: string;
   date: string;
+  index?: number;
 }
 
 const POSTS_DIR = "post";
@@ -33,11 +34,14 @@ export const getAllPostsMetaDatas = () => {
       return data as PostMetaData;
     })
     .sort((post1, post2) => {
+      if (post1.date === post2.date && post1?.index && post2?.index) {
+        const isPost1AfterPost2 = post1.index > post2.index;
+        return isPost1AfterPost2 ? -1 : 1;
+      }
+
       const date1 = dayjs(post1.date, "YYYY-MM-DD");
       const date2 = dayjs(post2.date, "YYYY-MM-DD");
-
       const isDate1AfterDate2 = date1.isAfter(date2);
-
       return isDate1AfterDate2 ? -1 : 1;
     });
 

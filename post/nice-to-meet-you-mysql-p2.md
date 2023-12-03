@@ -3,6 +3,7 @@ title: "Nice to meet you MySQL - part 2"
 subtitle: "Introduce common SQL data types, basic query syntax …etc"
 date: "2023-12-03"
 tag: "mysql,database"
+index: 2
 ---
 
 Full Database Course for Beginners](https://www.youtube.com/watch?v=HXV3zeQKqGY)** course **.**

@@ -3,6 +3,7 @@ title: "Nice to meet you MySQL - part 1"
 subtitle: "Introduce database, SQL, keys and the installation process"
 date: "2023-12-03"
 tag: "mysql,database"
+index: 1
 ---
 
 The articles are notes I took on the **[SQL Tutorial - Full Database Course for Beginners](https://www.youtube.com/watch?v=HXV3zeQKqGY)** course **.**
