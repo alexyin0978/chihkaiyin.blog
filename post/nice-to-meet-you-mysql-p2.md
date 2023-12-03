@@ -114,7 +114,7 @@ TIMESTAMP
     INSERT INTO student(student_id, name) VALUES(2, 'Alex');
     ```
     
-    ![截圖 2023-11-27 下午2.41.59.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b28b6252-fa85-464f-83fa-e18c4211ebde/a5125dd1-aab8-4c4e-a4ac-888dee9cb469/%E6%88%AA%E5%9C%96_2023-11-27_%E4%B8%8B%E5%8D%882.41.59.png)
+    ![insert_fig1.png](/post/nice-to-meet-you-mysql-p2/insert_fig1.png)
     
 2. select (print) table data
     
@@ -299,4 +299,4 @@ A <= B
 
 ### Reference
 
-1. ****[SQL Tutorial](https://www.youtube.com/watch?v=HXV3zeQKqGY&t=606s) - Full Database Course for Beginners**
+1. **[SQL Tutorial](https://www.youtube.com/watch?v=HXV3zeQKqGY&t=606s) - Full Database Course for Beginners**
