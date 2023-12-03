@@ -9,10 +9,10 @@ The articles are notes I took on the **[SQL Tutorial - Full Database Course for 
 
 They break into four parts:
 
-1. First article will introduce what is a database, SQL, keys and walk through the installation of MySQL on Mac.
-2. Second article introduces the common SQL data types, basic query syntax …etc.
-3. In third article we will create company tables, practice how to query on data, and introduce Functions, Wildcards …etc.
-4. The last article we introduce ER Diagrams, a way to diagram the requirements into figures, then we learn how to transform the ER Diagrams into actual SQL table schemas.
+1. [First article](https://chihkaiyin.blog/nice-to-meet-you-mysql-p1) will introduce what is a database, SQL, keys and walk through the installation of MySQL on Mac.
+2. [Second article](https://chihkaiyin.blog/nice-to-meet-you-mysql-p2) introduces the common SQL data types, basic query syntax …etc.
+3. [In third article](https://chihkaiyin.blog/nice-to-meet-you-mysql-p3) we will create company tables, practice how to query on data, and introduce Functions, Wildcards …etc.
+4. [The last article](https://chihkaiyin.blog/nice-to-meet-you-mysql-p4) we introduce ER Diagrams, a way to diagram the requirements into figures, then we learn how to transform the ER Diagrams into actual SQL table schemas.
 
 Now, let’s get started.
 
@@ -46,7 +46,7 @@ A table is consist of columns and rows:
 ### Keys
 
 1. Primary Key
-    - Attribute ****uniquely defines the row in the table / database
+    - Attribute uniquely defines the row in the table / database
     - Must be **unique**
     - Can be anything, number, string …etc
     - Real World Related
