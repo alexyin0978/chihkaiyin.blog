@@ -3,6 +3,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import rangeParser from "parse-numeric-range";
+import remarkGfm from "remark-gfm";
 
 import { useHasMounted } from "@/hooks/useHasMounted";
 
@@ -105,6 +106,8 @@ export default function Markdown({ content }: { content: string }) {
       components={{
         code: codeComponents,
       }}
+      // TODO: remark-gfm newest version have bug, so currently using 3.0.1
+      remarkPlugins={[remarkGfm]}
     >
       {content}
     </ReactMarkdown>
