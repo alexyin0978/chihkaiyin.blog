@@ -59,17 +59,7 @@ Notice that I use “initial”. For the later user interaction, such as route c
 
 ### Comparison on CSR and Traditional SSR
 
-|  | CSR | Traditional SSR |
-| --- | --- | --- |
-| SEO | ❌ 
-Empty HTML is bad for SEO. | ✅
-Contentful HTML allows browser to crawl the page information. |
-| Initial user experience | ❌ 
-Empty HTML means empty page UI, which leads to bad initial experience. | ✅
-With all the content server-side rendered, user sees a contentful page initially, which leads to better user experience. |
-| Subsequent user experience | ✅
-React takes over all subsequent user interactions, which is far faster then requesting new HTML every time. | ❌
-Every time user navigates to new route, request for new HTML is needed, which is far slower then handling by React. |
+![t_1.png](/post/build-our-own-react-ssr/t_1.png)
 
 ![fig_3.png](/post/build-our-own-react-ssr/fig_3.png)
 
@@ -91,20 +81,7 @@ And since the app is written with JSX, React can simply use the those JSX compon
 
 ### Comparison on CSR, Traditional SSR and React SSR
 
-|  | CSR | Traditional SSR | React SSR |
-| --- | --- | --- | --- |
-| SEO | ❌ 
-Empty HTML is bad for SEO. | ✅
-Contentful HTML allows browser to crawl the page information. | ✅
-Contentful HTML allows browser to crawl the page information. |
-| Initial user experience | ❌ 
-Empty HTML means empty page UI, which leads to bad initial experience. | ✅
-With all the content server-side rendered, user sees a contentful page initially, which leads to better user experience. | ✅
-With all the content server-side rendered, user sees a contentful page initially, which leads to better user experience. |
-| Subsequent user experience | ✅
-React takes over all subsequent user interactions, which is far faster then requesting new HTML every time. | ❌
-Every time user navigates to new route, request for new HTML is needed, which is far slower then handling by React. | ✅
-React takes over all subsequent user interactions, which is far faster then requesting new HTML every time. |
+![t_2.png](/post/build-our-own-react-ssr/t_2.png)
 
 ![fig_5.png](/post/build-our-own-react-ssr/fig_5.png)
 
@@ -390,15 +367,22 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   const [count, setCount] = useState(0);
+  
+  const onClick = () => {
+    setCount(count + 1)
+  }
 
   return (
-    <div>
-      this is home page
-      <button type="button" onClick={() => setCount(count + 1)}>
-        add
-      </button>
-      <Link to={"/about"}>to about page</Link>
-    </div>
+    // <div>
+    //   this is home page
+    //   <button 
+    //   type={"button"}
+    //   onClick={onClick}
+    //   >
+    //     add
+    //   </button>
+    //   <Link to="/about">to about page</Link>
+    // </div>
   );
 };
 
@@ -412,10 +396,10 @@ import { Link } from "react-router-dom";
 
 const About = () => {
   return (
-    <div>
-      this is about page
-      <Link to={"/"}>to home page</Link>
-    </div>
+    // <div>
+    //   this is about page
+    //   <Link to={"/"}>to home page</Link>
+    // </div>
   );
 };
 
