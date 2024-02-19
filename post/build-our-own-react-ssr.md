@@ -42,7 +42,7 @@ When a user enters a website, browser will get an empty HTML file with a script 
 
 After loading and finish executing the React, React will then mount the entire App to the browser, at this point can the user finally see and interact with the website UI. 
 
-![截圖 2024-02-19 上午10.48.50.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b28b6252-fa85-464f-83fa-e18c4211ebde/cdc0c645-34b8-46f3-ae05-5cad260c617d/%E6%88%AA%E5%9C%96_2024-02-19_%E4%B8%8A%E5%8D%8810.48.50.png)
+![fig_1.png](/post/build-our-own-react-ssr/fig_1.png)
 
 As you may notice, the rendering of the page content can only starts after React takes over control, this can lead to some drawbacks:
 
@@ -55,7 +55,7 @@ SSR refers to Server Side Rendering. Traditionally, SSR means that when the user
 
 Notice that I use “initial”. For the later user interaction, such as route change within the same page, the user will always have to request a new HTML, this can lead to bad interaction experience later.
 
-![截圖 2024-02-19 上午11.11.03.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b28b6252-fa85-464f-83fa-e18c4211ebde/7e83785d-5df3-4069-bcad-242c1fcef1ec/%E6%88%AA%E5%9C%96_2024-02-19_%E4%B8%8A%E5%8D%8811.11.03.png)
+![fig_2.png](/post/build-our-own-react-ssr/fig_2.png)
 
 ### Comparison on CSR and Traditional SSR
 
@@ -71,7 +71,7 @@ With all the content server-side rendered, user sees a contentful page initially
 React takes over all subsequent user interactions, which is far faster then requesting new HTML every time. | ❌
 Every time user navigates to new route, request for new HTML is needed, which is far slower then handling by React. |
 
-![截圖 2024-02-19 上午11.11.52.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b28b6252-fa85-464f-83fa-e18c4211ebde/7286e84a-c8ea-48a7-a08a-be7b3d6ed1c9/%E6%88%AA%E5%9C%96_2024-02-19_%E4%B8%8A%E5%8D%8811.11.52.png)
+![fig_3.png](/post/build-our-own-react-ssr/fig_3.png)
 
 In the next section, we will introduce React SSR, which combines the advantages of traditional SSR and CSR.
 
@@ -87,7 +87,7 @@ When a user enters a website, the server will render the React App into HTML usi
 
 And since the app is written with JSX, React can simply use the those JSX components on the client side too. This means, when the initial HTML is loaded on the browser, React “hydrates” the same components into the pre-rendered HTML, meaning it attaches client-side logic such as hooks and events onto the HTML, building a copy of vDOM, and taking control of the all subsequent user interactions.
 
-![截圖 2024-02-19 上午11.30.55.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b28b6252-fa85-464f-83fa-e18c4211ebde/04774e3f-c00d-4d47-a50f-55bd2d0269bd/%E6%88%AA%E5%9C%96_2024-02-19_%E4%B8%8A%E5%8D%8811.30.55.png)
+![fig_4.png](/post/build-our-own-react-ssr/fig_4.png)
 
 ### Comparison on CSR, Traditional SSR and React SSR
 
@@ -106,7 +106,7 @@ React takes over all subsequent user interactions, which is far faster then requ
 Every time user navigates to new route, request for new HTML is needed, which is far slower then handling by React. | ✅
 React takes over all subsequent user interactions, which is far faster then requesting new HTML every time. |
 
-![截圖 2024-02-19 上午11.31.33.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b28b6252-fa85-464f-83fa-e18c4211ebde/13c9b242-56c4-42a9-8059-877510a6359d/%E6%88%AA%E5%9C%96_2024-02-19_%E4%B8%8A%E5%8D%8811.31.33.png)
+![fig_5.png](/post/build-our-own-react-ssr/fig_5.png)
 
 Now we know the concepts, in the next section, we will start to build our simple React SSR framework with React, Vite and Express.
 
@@ -175,7 +175,7 @@ Parsing the server-rendered HTML, browser will see the script:
 
 and requests for our client side react `entry-client.tsx`. After loading client side React, React will “hydrate” the entire vDOM into current HTML, attaching all hooks and events onto it, and taking control over the later user interaction.
 
-![截圖 2024-02-19 中午12.39.55.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b28b6252-fa85-464f-83fa-e18c4211ebde/5809c6f5-d0b4-45bd-9df2-c4646451c14a/%E6%88%AA%E5%9C%96_2024-02-19_%E4%B8%AD%E5%8D%8812.39.55.png)
+![fig_6.png](/post/build-our-own-react-ssr/fig_6.png)
 
 Let’s walk through each file.
 
@@ -358,7 +358,7 @@ ReactDOM.hydrateRoot(
 
 You will get a hydration error like this:
 
-![截圖 2024-02-19 下午1.05.32.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/b28b6252-fa85-464f-83fa-e18c4211ebde/4cafa474-6ca8-42d4-8889-806a6c4370f0/%E6%88%AA%E5%9C%96_2024-02-19_%E4%B8%8B%E5%8D%881.05.32.png)
+![fig_7.png](/post/build-our-own-react-ssr/fig_7.png)
 
 ## SSR with routing
 
@@ -503,7 +503,7 @@ const html = ReactDOMServer.renderToString(
 
 Now when user visit certain page through refresh or typing inside url bar, we will serve them whole new HTML, while navigating through `<Link>` button on browser, we will navigate to new page through client side routing:
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/b28b6252-fa85-464f-83fa-e18c4211ebde/2afec5ed-54c6-4c69-9599-ab59adaa6246/Untitled.gif)
+![fig_8.gif](/post/build-our-own-react-ssr/fig_8.gif)
 
 ## Wrap up 🚀
 
