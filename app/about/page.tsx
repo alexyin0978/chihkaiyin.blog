@@ -9,6 +9,9 @@ export async function generateMetadata() {
   return {
     title: "YIN - About",
     description: "A blog built by ChihKai Yin.",
+    verification: {
+      google: "OClxUvjGT1EoL8xqJME8V429q5i_kN7hylWDgW7gNHc",
+    },
   };
 }
 
