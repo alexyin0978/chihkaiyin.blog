@@ -25,6 +25,9 @@ export async function generateMetadata({
   return {
     title: `YIN - ${postMetaData.title}`,
     description: postMetaData.subtitle,
+    verification: {
+      google: "OClxUvjGT1EoL8xqJME8V429q5i_kN7hylWDgW7gNHc",
+    },
   };
 }
 
