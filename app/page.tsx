@@ -13,6 +13,9 @@ export const metadata = {
   metadataBase: new URL("https://chihkaiyin.blog"),
   creator: "ChihKai Yin",
   description: "A blog built by ChihKai Yin.",
+  verification: {
+    google: "OClxUvjGT1EoL8xqJME8V429q5i_kN7hylWDgW7gNHc",
+  },
   keywords: [
     "chihkai yin",
     "programming",
